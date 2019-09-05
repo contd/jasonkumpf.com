@@ -1,27 +1,27 @@
 <template>
   <v-card
     class="mx-auto my-2"
-    :raised="raised"
+    raised
     width="240"
   >
     <v-img
       class="white--text"
       height="240"
-      :src="thumb"
+      :src="photo.thumb"
     />
 
     <v-card-title>
       <v-link
-        :to="path"
+        :to="photo.path"
         nuxt
       >
-        {{ name }}
+        {{ photo.name }}
       </v-link>
     </v-card-title>
 
     <v-card-text>
-      {{ size | humanSize }}
-      {{ modified | humanDate }}
+      {{ photo.size | humanSize }}
+      {{ photo.modified | humanDate }}
     </v-card-text>
 
     </v-card-actions>
@@ -41,29 +41,9 @@ export default {
     }
   },
   props: {
-    name: {
-      type: String,
-      default: 'Photo Name'
-    },
-    path: {
-      type: String,
-      default: ''
-    },
-    thumb: {
-      type: String,
-      default: ''
-    },
-    size: {
-      type: Number,
-      default: 0
-    },
-    width: {
-      type: Number,
-      default: 240
-    },
-    modified: {
-      type: String,
-      default: ''
+    photo: {
+      // eslint-disable-next-line vue/require-default-prop
+      type: Object
     }
   },
   methods: {

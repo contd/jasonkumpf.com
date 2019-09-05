@@ -8,14 +8,11 @@
       flat
       tile
     >
-      <div
+      <FolderCard
         v-for="(folder, i) in folders"
         :key="i"
-      >
-        <nuxt-link :to="`/photos?path=${folder.name}`">
-          {{ folder.name }}
-        </nuxt-link>
-      </div>
+        :folder="folder"
+      />
     </v-container>
     <v-container
       fluid
@@ -26,12 +23,7 @@
       <PhotoCard
         v-for="(photo, idx) in photos"
         :key="idx"
-        :name="photo.name"
-        :path="photo.path"
-        :thumb="photo.thumb"
-        :size="photo.size"
-        :width="photo.width"
-        :modified="photo.modified"
+        :photo="photo"
       />
     </v-container>
   </v-layout>
@@ -39,6 +31,7 @@
 
 <script>
 // import { mapState } from 'vuex'
+import FolderCard from '@/components/FolderCard'
 import PhotoCard from '@/components/PhotoCard'
 
 export default {
@@ -48,27 +41,23 @@ export default {
     }
   },
   components: {
+    FolderCard,
     PhotoCard
   },
-  data () {
-    return {
-      links: [],
-      folders: []
-    }
-  },
-  async asyncData ({ $axios, error }) {
-    try {
-      const files = await $axios.get('/original')
-      return {
-        photos: files.Pictures,
-        folders: files.Directories
-      }
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: `Unable to fetch photos at this time: ${e}`
+  asyncData ({ $axios, error }) {
+    $axios.get('http://localhost:8088/original')
+      .then((resp) => {
+        return {
+          photos: resp.data.Pictures,
+          folders: resp.data.Directories
+        }
       })
-    }
+      .catch((e) => {
+        error({
+          statusCode: 503,
+          message: `Unable to fetch photos at this time: ${e}`
+        })
+      })
   }
 }
 </script>
