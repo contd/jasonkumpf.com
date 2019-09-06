@@ -41,15 +41,16 @@ type Exif struct {
 
 // Picture struct is for picture objects
 type Picture struct {
-	Name    string    `json:"name"`
-	Size    int64     `json:"size"`
-	Type    string    `json:"type"`
-	ModTime time.Time `json:"modified"`
-	Path    string    `json:"path"`
-	Thumb   string    `json:"thumb"`
-	Width   int       `json:"width"`
-	Height  int       `json:"height"`
-	Exif    Exif      `json:"exif"`
+	Name     string    `json:"name"`
+	Size     int64     `json:"size"`
+	Type     string    `json:"type"`
+	ModTime  time.Time `json:"modified"`
+	Path     string    `json:"path"`
+	Thumb    string    `json:"thumb"`
+	Original string    `json:"original"`
+	Width    int       `json:"width"`
+	Height   int       `json:"height"`
+	Exif     Exif      `json:"exif"`
 }
 
 // Files struct stores the current directory's contents in separate arrays of directores or pictures
@@ -91,7 +92,7 @@ func main() {
 		}
 		RootPath = r
 	}
-	Directories, Pictures = readPath(RootPath)
+	Directories, Pictures = readPath(RootPath, "")
 
 	router := echo.New()
 	router.Use(middleware.Logger())
@@ -103,18 +104,18 @@ func main() {
 	}))
 	router.Static("/photos", RootPath)
 	router.GET("/", listRoot)
-	router.GET("/original", listOriginal)
+	router.GET("/albums", listAlbums)
 	router.GET("/panorama", listPanorama)
 	router.Logger.Fatal(router.Start(ServerPort))
 }
 
 func listRoot(c echo.Context) error {
-	pathParam := c.QueryParam("path")
+	pathParam := ""
 	return listFiles(pathParam, c)
 }
 
-func listOriginal(c echo.Context) error {
-	pathParam := "/original"
+func listAlbums(c echo.Context) error {
+	pathParam := "/albums"
 	return listFiles(pathParam, c)
 }
 
@@ -125,21 +126,21 @@ func listPanorama(c echo.Context) error {
 
 func listFiles(pathParam string, c echo.Context) error {
 	if c.QueryParam("path") != "" {
-		pathParam = pathParam + "/" + c.QueryParam("path")
+		pathParam = path.Join(pathParam, c.QueryParam("path"))
 	}
 	pageParam, _ := strconv.Atoi(c.QueryParam("page"))
 	if pageParam == 0 {
 		pageParam = 1
 	}
-	files := getFiles(pathParam, pageParam)
+	files := getFiles(pathParam, pageParam, c.Path())
 	return c.JSON(http.StatusOK, files)
 }
 
-func getFiles(pathParam string, pageParam int) Files {
+func getFiles(pathParam string, pageParam int, ctxPath string) Files {
 	if pathParam != "" && pathParam != "/" {
-		Directories, Pictures = readPath(path.Join(RootPath, pathParam))
+		Directories, Pictures = readPath(path.Join(RootPath, pathParam), ctxPath)
 	} else {
-		Directories, Pictures = readPath(RootPath)
+		Directories, Pictures = readPath(RootPath, ctxPath)
 	}
 	sort.SliceStable(Directories, func(i, j int) bool {
 		return Directories[i].Name < Directories[j].Name
@@ -157,7 +158,7 @@ func getFiles(pathParam string, pageParam int) Files {
 	return files
 }
 
-func readPath(fullPath string) ([]Directory, []Picture) {
+func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 	dir, err := os.Open(fullPath)
 	if err != nil {
 		log.Fatalf("failed to open dir: %s", err)
@@ -165,7 +166,9 @@ func readPath(fullPath string) ([]Directory, []Picture) {
 	defer dir.Close()
 
 	relPath := s.Replace(fullPath, RootPath, "", 1)
-	thumbPath := s.Replace(relPath, "/original", "/thumb", 1)
+	if ctxPath != "" {
+		relPath = s.Replace(relPath, ctxPath, "", 1)
+	}
 	items, err := dir.Readdir(0)
 	if err != nil {
 		log.Fatalf("failed to read dir: %s", err)
@@ -181,7 +184,7 @@ func readPath(fullPath string) ([]Directory, []Picture) {
 					Name:    item.Name(),
 					Size:    item.Size(),
 					ModTime: item.ModTime(),
-					Path:    fmt.Sprintf("%s%s/?path=%s", ServerHost, ServerPort, path.Join(relPath, item.Name())),
+					Path:    fmt.Sprintf("?path=%s", path.Join(relPath, item.Name())),
 				}
 				dirs = append(dirs, directory)
 			}
@@ -203,15 +206,16 @@ func readPath(fullPath string) ([]Directory, []Picture) {
 					exifInfo = Exif{Lat: 0, Long: 0}
 				}
 				picture := Picture{
-					Name:    item.Name(),
-					Size:    item.Size(),
-					Type:    mimeType,
-					ModTime: item.ModTime(),
-					Path:    fmt.Sprintf("%s%s/photos%s", ServerHost, ServerPort, path.Join(relPath, item.Name())),
-					Thumb:   fmt.Sprintf("%s%s/photos%s", ServerHost, ServerPort, path.Join(thumbPath, item.Name())),
-					Width:   image.Width,
-					Height:  image.Height,
-					Exif:    exifInfo,
+					Name:     item.Name(),
+					Size:     item.Size(),
+					Type:     mimeType,
+					ModTime:  item.ModTime(),
+					Path:     fmt.Sprintf("/photos%s", path.Join(relPath, item.Name())),
+					Thumb:    fmt.Sprintf("/photos%s", path.Join(relPath, "thumbs", item.Name())),
+					Original: fmt.Sprintf("/photos%s", path.Join(relPath, "original", item.Name())),
+					Width:    image.Width,
+					Height:   image.Height,
+					Exif:     exifInfo,
 				}
 				pics = append(pics, picture)
 			}
