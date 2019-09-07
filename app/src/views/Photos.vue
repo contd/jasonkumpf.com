@@ -35,17 +35,12 @@ import FolderCard from '@/components/FolderCard'
 import PhotoCard from '@/components/PhotoCard'
 
 export default {
-  head () {
-    return {
-      title: 'Photos'
-    }
-  },
   components: {
     FolderCard,
     PhotoCard
   },
-  asyncData ({ $axios, error }) {
-    $axios.get('http://localhost:8088/albums')
+  created () {
+    this.axios.get('/albums')
       .then((resp) => {
         return {
           photos: resp.data.Pictures,
@@ -53,10 +48,7 @@ export default {
         }
       })
       .catch((e) => {
-        error({
-          statusCode: 503,
-          message: `Unable to fetch photos at this time: ${e}`
-        })
+        console.log(`Error Getting Photo Albums: ${e}`)
       })
   }
 }

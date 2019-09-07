@@ -11,10 +11,10 @@ const apiClient = axios.create({
 
 export default {
   getPhotos () {
-    return apiClient.get('/original')
+    return apiClient.get('/albums')
   },
   getPhotosByPath (path) {
-    return apiClient.get('/original?path=' + path)
+    return apiClient.get('/albums?path=' + path)
   },
   getPanoramas () {
     return apiClient.get('/panorama')
