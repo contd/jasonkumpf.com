@@ -10,10 +10,10 @@
       tile
     >
       <PhotoCard
-        v-for="(photo, idx) in photos"
+        v-for="(panorama, idx) in panoramas"
         :key="idx"
-        :photo="photo"
-        @click="showPhoto(photo)"
+        :photo="panorama"
+        @click="showPhoto(panorama)"
       />
     </v-container>
     <v-overlay :value="overlay">
@@ -38,22 +38,22 @@ import PhotoCard from '@/components/PhotoCard'
 export default {
   head () {
     return {
-      title: 'Photos'
+      title: 'Panoramas'
     }
   },
   components: {
     PhotoCard
   },
   computed: mapState({
-    photos: state => state.photos.photos
+    panoramas: state => state.panoramas.panoramas
   }),
   async fetch ({ store, params, error }) {
     try {
-      await store.dispatch('photos/fetchPhotosByPath', params.album)
+      await store.dispatch('panoramas/fetchPanoramasByPath', params.album)
     } catch (e) {
       error({
         statusCode: 503,
-        message: `Unable to fetch photos at this time: ${e}`
+        message: `Unable to fetch albums (panorama) at this time: ${e}`
       })
     }
   },

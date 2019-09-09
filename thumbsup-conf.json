@@ -1,0 +1,17 @@
+{
+  "input": "/home/jason/current-projects/web-designs/travel",
+  "output": "./travel",
+  "title": "Travel",
+  "thumb-size": 200,
+  "large-size": 1500,
+  "photo-download": "link",
+  "link-prefix": "/originals/",
+	"photo-quality": 100,
+	"include-raw-photos": true,
+  "video-download": "link",
+	"video-quality": 100,
+	"video-format": "webm",
+  "sort-albums-by": "start-date",
+  "theme-path": "./theme-jason",
+	"usage-stats": false
+}

@@ -1,0 +1,14 @@
+{
+  "name": "vuetheme",
+  "version": "0.1.0",
+  "description": "Vue.js based theme for Thumbsup",
+  "keywords": ["thumbsup","theme","photos","gallery"],
+  "author": "Jason Kumpf <jason@kumpf.io> (https://kumpf.io)",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+	"thumbsup": {
+    "themeRoot": "theme"
+  }
+}

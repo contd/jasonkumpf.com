@@ -40,13 +40,13 @@ export const actions = {
   },
   fetchPanoramas ({ commit }) {
     return PhotoService.getPanoramas().then((resp) => {
-      commit('SET_PHOTOS', resp.data.Pictures)
+      commit('SET_PANORAMAS', resp.data.Pictures)
       commit('SET_FOLDERS', resp.data.Directories)
     })
   },
   fetchPanoramasByPath ({ commit }, path) {
     return PhotoService.getPanoramasByPath(path).then((resp) => {
-      commit('SET_PHOTOS', resp.data)
+      commit('SET_PANORAMAS', resp.data)
     })
   }
 }

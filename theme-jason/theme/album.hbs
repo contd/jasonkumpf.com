@@ -1,0 +1,193 @@
+<template>
+    <v-layout
+    class="d-flex flex-row flex-wrap justify-space-around"
+  >
+    <v-row>
+      <v-col>
+      <h1>
+        <a href="{{relative gallery.home.url}}">
+          {{gallery.title}}
+        </a>
+      </h1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+
+        <v-breadcrumbs>
+          {{#each breadcrumbs~}}
+            <v-breadcrumbs-item
+              to="{{relative url}}"
+            >
+          {{title}}
+          </v-breadcrumbs-item>
+          {{~/each~}}
+          <v-breadcrumbs-item
+            to="{{relative album.url}}"
+          >
+            {{album.title}}
+          </v-breadcrumbs-item>
+        </v-breadcrumbs>
+
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+
+      {{#each album.albums~}}
+        <v-card
+          max-width="344"
+          class="mx-auto"
+          to="{{relative url}}"
+        >
+          <v-list-item>
+            <v-list-item-avatar color="grey"></v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title class="headline">
+                {{title}}
+              </v-list-item-title>
+              <v-list-item-subtitle>
+
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-img
+            src="{{relative previews.0.urls.large}}"
+            height="194"
+          ></v-img>
+
+          <v-card-text>
+            Photos: {{stats.photos}}
+            Videos: {{stats.videos}}
+            From: {{{date stats.fromDate}}}
+            To: {{{date stats.toDate}}}
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn
+              text
+              color="deep-purple accent-4"
+            >
+              VIEW
+            </v-btn>
+            <v-btn icon>
+              <v-icon>mdi-share-variant</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      {{~/each}}
+
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col
+        class="d-flex child-flex"
+      >
+
+      {{#each album.files~}}
+
+        <v-card
+          flat
+          tile
+          class="d-flex"
+          to="{{relative urls.large}}"
+        >
+          <v-img
+            src="{{relative urls.thumbnail}}"
+            aspect-ratio="1"
+            class="grey lighten-2"
+            alt="{{filename}}"
+          >
+            <template v-slot:placeholder>
+              <v-row
+                class="fill-height ma-0"
+                align="center"
+                justify="center"
+              >
+                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+
+          <v-card-actions>
+            <v-btn
+              icon
+              @click="show = !show"
+              :icon="chevToggle"
+            >
+            </v-btn>
+          </v-card-actions>
+
+          <v-expand-transition>
+            <div v-show="show">
+              <v-card-text>
+                <div>
+                  {{date}} - w:{{meta.width}} h:{{meta.height}}
+                </div>
+                <div>
+                  <a href="{{relative urls.download}}">Original</a>
+                </div>
+                {{#if meta.exif}}
+                  <v-list>
+                    <v-list-item-group>
+                      <v-list-item>
+                        <v-list-item-content>
+                          DateTime: {{meta.exif.DateTimeOriginal}}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-list-item-content>
+                          Latitude: {{meta.exif.GPSLatitude}}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-list-item-content>
+                          Longitude: {{meta.exif.GPSLongitude}}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-list-item-content>
+                          RefLatitude: {{meta.exif.GPSLatitudeRef}}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-list-item-content>
+                          RefLongitude: {{meta.exif.GPSLongitudeRef}}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-list-item-content>
+                          Altitude: {{meta.exif.GPSAltitude}}
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list-item-group>
+                  </v-list>
+                {{/if}}
+              </v-card-text>
+            </div>
+          </v-expand-transition>
+        </v-card>
+
+      {{~/each}}
+
+      </v-col>
+    </v-row>
+  </v-layout>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      show: false,
+      title: '{{gallery.title}}',
+      homeUrl: '{{relative gallery.home.url}}'
+    }),
+    computed: {
+      chevToggle() {
+        return (this.show ? 'mdi-chevron-up' : 'mdi-chevron-down')
+      }
+    }
+  }
+</script>
+

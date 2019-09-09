@@ -4,7 +4,6 @@
     raised
     width="300"
     height="300"
-    @click="showPhoto(photo.path)"
   >
     <v-img
       class="white--text"
@@ -49,11 +48,6 @@ export default {
     photo: {
       // eslint-disable-next-line vue/require-default-prop
       type: Object
-    }
-  },
-  methods: {
-    showPhoto (path) {
-      //
     }
   }
 }
