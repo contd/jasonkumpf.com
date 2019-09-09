@@ -2,7 +2,9 @@
   <v-card
     class="mx-auto my-2"
     raised
-    width="240"
+    width="300"
+    height="300"
+    @click="showPhoto(photo.path)"
   >
     <v-img
       class="white--text"
@@ -10,20 +12,14 @@
       :src="photo.thumb"
     />
 
-    <v-card-title>
-      <v-link
-        :to="photo.path"
-        nuxt
-      >
-        {{ photo.name }}
-      </v-link>
-    </v-card-title>
-
-    <v-card-text>
-      {{ photo.size | humanSize }}
-      {{ photo.modified | humanDate }}
-    </v-card-text>
-
+    <v-card-actions>
+      <div>
+        {{ photo.modified | humanDate }}
+      </div>
+      <div class="flex-grow-1"></div>
+      <div>
+        {{ photo.size | humanSize }}
+      </div>
     </v-card-actions>
   </v-card>
 </template>
@@ -53,6 +49,11 @@ export default {
     photo: {
       // eslint-disable-next-line vue/require-default-prop
       type: Object
+    }
+  },
+  methods: {
+    showPhoto (path) {
+      //
     }
   }
 }

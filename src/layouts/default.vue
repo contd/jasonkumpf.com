@@ -122,8 +122,8 @@ export default {
         },
         {
           icon: 'mdi-airplane',
-          title: 'Travel',
-          to: '/travel'
+          title: 'Travels',
+          to: '/travels'
         }
       ]
     }
