@@ -36,18 +36,7 @@ export default {
     humanDate (date) {
       return moment(date).format('ddd, MMM Do YYYY')
     },
-    humanSize (num) {
-      return this.prettyBytes(num)
-    }
-  },
-  props: {
-    photo: {
-      // eslint-disable-next-line vue/require-default-prop
-      type: Object
-    }
-  },
-  methods: {
-    prettyBytes (num, precision = 3, addSpace = true) {
+    humanSize (num, precision = 3, addSpace = true) {
       const UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
 
       if (Math.abs(num) < 1) {
@@ -58,6 +47,12 @@ export default {
       const n = Number(((num < 0 ? -num : num) / 1000 ** exponent).toPrecision(precision))
 
       return (num < 0 ? '-' : '') + n + (addSpace ? ' ' : '') + UNITS[exponent]
+    }
+  },
+  props: {
+    photo: {
+      // eslint-disable-next-line vue/require-default-prop
+      type: Object
     }
   }
 }

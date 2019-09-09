@@ -2,17 +2,6 @@
   <v-layout
     class="fill-height"
   >
-    <v-container
-      fluid
-      class="d-flex flex-wrap mx-2 justify-space-around fill-height"
-      flat
-      tile
-    >
-      <FolderCard
-        v-for="(folder, i) in folders"
-        :key="i"
-        :folder="folder"
-      />
     </v-container>
     <v-container
       fluid
@@ -31,7 +20,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import FolderCard from '@/components/FolderCard'
 import PhotoCard from '@/components/PhotoCard'
 
 export default {
@@ -41,16 +29,14 @@ export default {
     }
   },
   components: {
-    FolderCard,
     PhotoCard
   },
   computed: mapState({
-    photos: state => state.photos.photos,
-    folders: state => state.photos.folders
+    photos: state => state.photos.photos
   }),
   async fetch ({ store, params, error }) {
     try {
-      await store.dispatch('photos/fetchPhotos')
+      await store.dispatch('photos/fetchPhotosByPath', params.album)
     } catch (e) {
       error({
         statusCode: 503,

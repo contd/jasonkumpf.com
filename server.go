@@ -84,13 +84,10 @@ func main() {
 	log.Printf("SERVER_PORT: %s", ServerPort)
 	log.Printf("SERVER_HOST: %s", ServerHost)
 
-	RootPath = os.Getenv("PHOTOS_PATH")
-	if RootPath == "" {
-		r, e := os.Getwd()
-		if e != nil {
-			log.Fatalf("Error getting working directory: %v", e)
-		}
-		RootPath = r
+	if os.Getenv("PHOTOS_PATH") == "" {
+		RootPath = "photos"
+	} else {
+		RootPath = os.Getenv("PHOTOS_PATH")
 	}
 	Directories, Pictures = readPath(RootPath, "")
 
@@ -102,46 +99,27 @@ func main() {
 		AllowOrigins: OriginsAllowed,
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
-	router.Static("/photos", RootPath)
+
+	router.Static("/photos", "./photos")
 	router.GET("/", listRoot)
-	router.GET("/albums", listAlbums)
-	router.GET("/panorama", listPanorama)
+	router.GET("/:path", listRoot)
+	router.GET("/:path/*", listRoot)
 	router.Logger.Fatal(router.Start(ServerPort))
 }
 
 func listRoot(c echo.Context) error {
-	pathParam := ""
-	return listFiles(pathParam, c)
-}
-
-func listAlbums(c echo.Context) error {
-	pathParam := "/albums"
-	return listFiles(pathParam, c)
-}
-
-func listPanorama(c echo.Context) error {
-	pathParam := "/panorama"
-	return listFiles(pathParam, c)
-}
-
-func listFiles(pathParam string, c echo.Context) error {
-	if c.QueryParam("path") != "" {
-		pathParam = path.Join(pathParam, c.QueryParam("path"))
-	}
 	pageParam, _ := strconv.Atoi(c.QueryParam("page"))
 	if pageParam == 0 {
 		pageParam = 1
 	}
-	files := getFiles(pathParam, pageParam, c.Path())
+	files := getFiles(pageParam, c)
 	return c.JSON(http.StatusOK, files)
 }
 
-func getFiles(pathParam string, pageParam int, ctxPath string) Files {
-	if pathParam != "" && pathParam != "/" {
-		Directories, Pictures = readPath(path.Join(RootPath, pathParam), ctxPath)
-	} else {
-		Directories, Pictures = readPath(RootPath, ctxPath)
-	}
+func getFiles(pageParam int, c echo.Context) Files {
+	ctxPath := s.Join(c.ParamValues(), "/")
+	Directories, Pictures = readPath(RootPath, ctxPath)
+
 	sort.SliceStable(Directories, func(i, j int) bool {
 		return Directories[i].Name < Directories[j].Name
 	})
@@ -149,7 +127,7 @@ func getFiles(pathParam string, pageParam int, ctxPath string) Files {
 		return Pictures[i].Name < Pictures[j].Name
 	})
 	// Limit (Paging)
-	Pictures = limitPics(pageParam, PageLimit)
+	//Pictures = limitPics(pageParam, PageLimit)
 
 	files := Files{
 		Directories: Directories,
@@ -159,16 +137,12 @@ func getFiles(pathParam string, pageParam int, ctxPath string) Files {
 }
 
 func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
-	dir, err := os.Open(fullPath)
+	dir, err := os.Open(path.Join(fullPath, ctxPath))
 	if err != nil {
 		log.Fatalf("failed to open dir: %s", err)
 	}
 	defer dir.Close()
 
-	relPath := s.Replace(fullPath, RootPath, "", 1)
-	if ctxPath != "" {
-		relPath = s.Replace(relPath, ctxPath, "", 1)
-	}
 	items, err := dir.Readdir(0)
 	if err != nil {
 		log.Fatalf("failed to read dir: %s", err)
@@ -178,19 +152,22 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 	var pics []Picture
 
 	for _, item := range items {
+		itemPath := path.Join(fullPath, ctxPath, item.Name())
+		hostURL := ServerHost + ServerPort + "/"
+
 		if item.IsDir() {
 			if item.Name() != "." && item.Name() != ".." {
 				directory := Directory{
 					Name:    item.Name(),
 					Size:    item.Size(),
 					ModTime: item.ModTime(),
-					Path:    fmt.Sprintf("?path=%s", path.Join(relPath, item.Name())),
+					Path:    fmt.Sprintf("%s%s", hostURL, path.Join(ctxPath, item.Name())),
 				}
 				dirs = append(dirs, directory)
 			}
 		} else {
 			if checkExtension(item.Name()) {
-				pic, err := os.Open(path.Join(fullPath, item.Name()))
+				pic, err := os.Open(itemPath)
 				if err != nil {
 					log.Fatalf("failed to open pic: %v", item.Name())
 				}
@@ -201,7 +178,7 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 					log.Fatalf("%s: %v", item.Name(), err)
 				}
 
-				exifInfo, exifErr := getExif(path.Join(fullPath, item.Name()))
+				exifInfo, exifErr := getExif(itemPath)
 				if exifErr != nil {
 					exifInfo = Exif{Lat: 0, Long: 0}
 				}
@@ -210,9 +187,9 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 					Size:     item.Size(),
 					Type:     mimeType,
 					ModTime:  item.ModTime(),
-					Path:     fmt.Sprintf("/photos%s", path.Join(relPath, item.Name())),
-					Thumb:    fmt.Sprintf("/photos%s", path.Join(relPath, "thumbs", item.Name())),
-					Original: fmt.Sprintf("/photos%s", path.Join(relPath, "original", item.Name())),
+					Path:     fmt.Sprintf("%s%s", hostURL, path.Join("photos", ctxPath, item.Name())),
+					Thumb:    fmt.Sprintf("%s%s", hostURL, path.Join("photos", ctxPath, "thumbs", item.Name())),
+					Original: fmt.Sprintf("%s%s", hostURL, path.Join("photos", ctxPath, "original", item.Name())),
 					Width:    image.Width,
 					Height:   image.Height,
 					Exif:     exifInfo,
@@ -234,7 +211,7 @@ func limitPics(p int, lim int) []Picture {
 	var rangePics []Picture
 
 	for i := s; i < e; i++ {
-		log.Printf("I: %v - LEN: %v", i, len(Pictures))
+		//log.Printf("I: %v - LEN: %v", i, len(Pictures))
 		rangePics = append(rangePics, Pictures[i])
 	}
 
@@ -279,13 +256,13 @@ func getExif(fname string) (Exif, error) {
 
 	f, err := os.Open(fname)
 	if err != nil {
-		log.Printf("Failed to open for exif [%s]: %v", fname, err)
+		//log.Printf("Failed to open for exif [%s]: %v", fname, err)
 		return Exif{}, err
 	}
 
 	x, err := exif.Decode(f)
 	if err != nil {
-		log.Printf("Failed to decode exif [%s]: %v", fname, err)
+		//log.Printf("Failed to decode exif [%s]: %v", fname, err)
 		return Exif{}, err
 	}
 

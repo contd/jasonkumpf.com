@@ -35,7 +35,7 @@ export const actions = {
   },
   fetchPhotosByPath ({ commit }, path) {
     return PhotoService.getPhotosByPath(path).then((resp) => {
-      commit('SET_PHOTOS', resp.data)
+      commit('SET_PHOTOS', resp.data.Pictures)
     })
   },
   fetchPanoramas ({ commit }) {

@@ -14,12 +14,12 @@ export default {
     return apiClient.get('/albums')
   },
   getPhotosByPath (path) {
-    return apiClient.get('/albums?path=' + path)
+    return apiClient.get('/albums/' + path)
   },
   getPanoramas () {
     return apiClient.get('/panorama')
   },
   getPanoramasByPath (path) {
-    return apiClient.get('/panorama?path=' + path)
+    return apiClient.get('/panorama/' + path)
   }
 }

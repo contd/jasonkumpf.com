@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="`/photos?path=${folder.name}`">
+  <nuxt-link :to="`/photos/${folder.name}`">
     {{ folder.name }}
   </nuxt-link>
 </template>
