@@ -153,7 +153,7 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 
 	for _, item := range items {
 		itemPath := path.Join(fullPath, ctxPath, item.Name())
-		hostURL := ServerHost + ServerPort + "/"
+		//hostURL := ServerHost + ServerPort + "/"
 
 		if item.IsDir() {
 			if item.Name() != "." && item.Name() != ".." {
@@ -161,7 +161,7 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 					Name:    item.Name(),
 					Size:    item.Size(),
 					ModTime: item.ModTime(),
-					Path:    fmt.Sprintf("%s%s", hostURL, path.Join(ctxPath, item.Name())),
+					Path:    fmt.Sprintf("%s", path.Join(ctxPath, item.Name())),
 				}
 				dirs = append(dirs, directory)
 			}
@@ -187,9 +187,9 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 					Size:     item.Size(),
 					Type:     mimeType,
 					ModTime:  item.ModTime(),
-					Path:     fmt.Sprintf("%s%s", hostURL, path.Join("photos", ctxPath, item.Name())),
-					Thumb:    fmt.Sprintf("%s%s", hostURL, path.Join("photos", ctxPath, "thumbs", item.Name())),
-					Original: fmt.Sprintf("%s%s", hostURL, path.Join("photos", ctxPath, "original", item.Name())),
+					Path:     fmt.Sprintf("/%s", path.Join("photos", ctxPath, item.Name())),
+					Thumb:    fmt.Sprintf("/%s", path.Join("photos", ctxPath, "thumbs", item.Name())),
+					Original: fmt.Sprintf("/%s", path.Join("photos", ctxPath, "original", item.Name())),
 					Width:    image.Width,
 					Height:   image.Height,
 					Exif:     exifInfo,
