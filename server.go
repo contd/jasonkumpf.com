@@ -31,6 +31,7 @@ type Directory struct {
 	Size    int64     `json:"size"`
 	ModTime time.Time `json:"modified"`
 	Path    string    `json:"path"`
+	Thumb   string    `json:"thumb"`
 }
 
 // Exif picture data struct
@@ -139,13 +140,13 @@ func getFiles(pageParam int, c echo.Context) Files {
 func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 	dir, err := os.Open(path.Join(fullPath, ctxPath))
 	if err != nil {
-		log.Fatalf("failed to open dir: %s", err)
+		log.Fatalf("readDir Open: failed to open dir: %s", err)
 	}
 	defer dir.Close()
 
 	items, err := dir.Readdir(0)
 	if err != nil {
-		log.Fatalf("failed to read dir: %s", err)
+		log.Fatalf("readDir Readdir: failed to read dir: %s", err)
 	}
 
 	var dirs []Directory
@@ -153,15 +154,17 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 
 	for _, item := range items {
 		itemPath := path.Join(fullPath, ctxPath, item.Name())
-		//hostURL := ServerHost + ServerPort + "/"
 
 		if item.IsDir() {
 			if item.Name() != "." && item.Name() != ".." {
+				firstThumb := getFirstThumb(path.Join(fullPath, ctxPath, item.Name()))
+
 				directory := Directory{
 					Name:    item.Name(),
 					Size:    item.Size(),
 					ModTime: item.ModTime(),
 					Path:    fmt.Sprintf("%s", path.Join(ctxPath, item.Name())),
+					Thumb:   fmt.Sprintf("%s", path.Join(ctxPath, item.Name(), "thumbs", firstThumb)),
 				}
 				dirs = append(dirs, directory)
 			}
@@ -200,6 +203,21 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 	}
 
 	return dirs, pics
+}
+
+func getFirstThumb(albumPath string) string {
+	dir, err := os.Open(albumPath)
+	if err != nil {
+		log.Fatalf("getFirstThumb: failed to open dir: %s", err)
+	}
+	defer dir.Close()
+
+	items, err := dir.Readdir(0)
+	if err != nil {
+		log.Fatalf("failed to read dir: %s", err)
+	}
+
+	return items[0].Name()
 }
 
 func limitPics(p int, lim int) []Picture {
