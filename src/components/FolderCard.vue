@@ -9,8 +9,7 @@
       class="white--text"
       height="180"
       :src="folder.thumb"
-    >
-    </v-img>
+    />
 
     <v-card-title>
       <nuxt-link
@@ -25,7 +24,6 @@
         Created: {{ folder.modified | humanDate }}
       </span>
     </v-card-text>
-
   </v-card>
 </template>
 
@@ -43,8 +41,8 @@ export default {
   },
   props: {
     folder: {
-      // eslint-disable-next-line vue/require-default-prop
-      type: Object
+      type: Object,
+      default: undefined
     }
   }
 }

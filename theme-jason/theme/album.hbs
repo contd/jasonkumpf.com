@@ -5,40 +5,35 @@
     <v-row>
       <v-col>
       <h1>
-        <a href="{{relative gallery.home.url}}">
-          {{gallery.title}}
-        </a>
+        {{album.title}}
       </h1>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-
         <v-breadcrumbs>
-          {{#each breadcrumbs~}}
+          {{#each breadcrumbs}}
             <v-breadcrumbs-item
-              to="{{relative url}}"
+              to="/travels/{{title}}"
             >
-          {{title}}
+            {{title}}
           </v-breadcrumbs-item>
           {{~/each~}}
           <v-breadcrumbs-item
-            to="{{relative album.url}}"
+            to="/travels/{{album.title}}"
           >
             {{album.title}}
           </v-breadcrumbs-item>
         </v-breadcrumbs>
-
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-
-      {{#each album.albums~}}
+      {{#each album.albums}}
         <v-card
           max-width="344"
           class="mx-auto"
-          to="{{relative url}}"
+          to="/travels/{{title}}"
         >
           <v-list-item>
             <v-list-item-avatar color="grey"></v-list-item-avatar>
@@ -46,24 +41,18 @@
               <v-list-item-title class="headline">
                 {{title}}
               </v-list-item-title>
-              <v-list-item-subtitle>
-
-              </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-
           <v-img
-            src="{{relative previews.0.urls.large}}"
+            src="{{fixlink (relative previews.0.urls.large)}}"
             height="194"
-          ></v-img>
-
+          />
           <v-card-text>
             Photos: {{stats.photos}}
             Videos: {{stats.videos}}
             From: {{{date stats.fromDate}}}
             To: {{{date stats.toDate}}}
           </v-card-text>
-
           <v-card-actions>
             <v-btn
               text
@@ -76,25 +65,22 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-      {{~/each}}
-
+      {{/each}}
       </v-col>
     </v-row>
     <v-row>
       <v-col
         class="d-flex child-flex"
       >
-
-      {{#each album.files~}}
-
+      {{#each album.files}}
         <v-card
           flat
           tile
           class="d-flex"
-          to="{{relative urls.large}}"
+          @click="showImage('{{fixlink (relative urls.large)}}')"
         >
           <v-img
-            src="{{relative urls.thumbnail}}"
+            src="{{fixlink (relative urls.thumbnail)}}"
             aspect-ratio="1"
             class="grey lighten-2"
             alt="{{filename}}"
@@ -105,11 +91,10 @@
                 align="center"
                 justify="center"
               >
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                <v-progress-circular indeterminate color="grey lighten-5" />
               </v-row>
             </template>
           </v-img>
-
           <v-card-actions>
             <v-btn
               icon
@@ -118,7 +103,6 @@
             >
             </v-btn>
           </v-card-actions>
-
           <v-expand-transition>
             <div v-show="show">
               <v-card-text>
@@ -126,7 +110,7 @@
                   {{date}} - w:{{meta.width}} h:{{meta.height}}
                 </div>
                 <div>
-                  <a href="{{relative urls.download}}">Original</a>
+                  <a href="{{fixlink (relative urls.download)}}">Original</a>
                 </div>
                 {{#if meta.exif}}
                   <v-list>
@@ -168,26 +152,28 @@
             </div>
           </v-expand-transition>
         </v-card>
-
-      {{~/each}}
-
+      {{/each}}
       </v-col>
     </v-row>
   </v-layout>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      show: false,
-      title: '{{gallery.title}}',
-      homeUrl: '{{relative gallery.home.url}}'
-    }),
-    computed: {
-      chevToggle() {
-        return (this.show ? 'mdi-chevron-up' : 'mdi-chevron-down')
-      }
+export default {
+  data: () => ({
+    show: false,
+    title: '{{album.title}}'
+  }),
+  computed: {
+    chevToggle() {
+      return (this.show ? 'mdi-chevron-up' : 'mdi-chevron-down')
+    }
+  },
+  methods: {
+    showImage (path) {
+      // show in fullscreen/overlay
     }
   }
+}
 </script>
 

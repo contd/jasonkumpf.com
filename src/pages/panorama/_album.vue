@@ -24,7 +24,7 @@
         <v-img
           :src="aPhoto.original"
           :alt="aPhoto.name"
-        ></v-img>
+        />
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-overlay>
@@ -44,6 +44,12 @@ export default {
   components: {
     PhotoCard
   },
+  data () {
+    return {
+      overlay: false,
+      aPhoto: ''
+    }
+  },
   computed: mapState({
     panoramas: state => state.panoramas.panoramas
   }),
@@ -56,10 +62,6 @@ export default {
         message: `Unable to fetch albums (panorama) at this time: ${e}`
       })
     }
-  },
-  data () {
-    overlay: false
-    aPhoto: ''
   },
   methods: {
     showPhoto (photo) {

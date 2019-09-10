@@ -15,7 +15,7 @@
       <div>
         {{ photo.modified | humanDate }}
       </div>
-      <div class="flex-grow-1"></div>
+      <div class="flex-grow-1" />
       <div>
         {{ photo.size | humanSize }}
       </div>
@@ -46,8 +46,8 @@ export default {
   },
   props: {
     photo: {
-      // eslint-disable-next-line vue/require-default-prop
-      type: Object
+      type: Object,
+      default: undefined
     }
   }
 }

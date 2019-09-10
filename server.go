@@ -43,16 +43,15 @@ type Exif struct {
 
 // Picture struct is for picture objects
 type Picture struct {
-	Name     string    `json:"name"`
-	Size     int64     `json:"size"`
-	Type     string    `json:"type"`
-	ModTime  time.Time `json:"modified"`
-	Path     string    `json:"path"`
-	Thumb    string    `json:"thumb"`
-	Original string    `json:"original"`
-	Width    int       `json:"width"`
-	Height   int       `json:"height"`
-	Exif     Exif      `json:"exif"`
+	Name    string    `json:"name"`
+	Size    int64     `json:"size"`
+	Type    string    `json:"type"`
+	ModTime time.Time `json:"modified"`
+	Path    string    `json:"path"`
+	Thumb   string    `json:"thumb"`
+	Width   int       `json:"width"`
+	Height  int       `json:"height"`
+	Exif    Exif      `json:"exif"`
 }
 
 // Files struct stores the current directory's contents in separate arrays of directores or pictures
@@ -83,9 +82,6 @@ var ServerPort = os.Getenv("SERVER_PORT")
 var ServerHost = os.Getenv("SERVER_HOST")
 
 func main() {
-	log.Printf("SERVER_PORT: %s", ServerPort)
-	log.Printf("SERVER_HOST: %s", ServerHost)
-
 	if os.Getenv("PHOTOS_PATH") == "" {
 		RootPath = "photos"
 	} else {
@@ -103,9 +99,13 @@ func main() {
 	}))
 
 	router.Static("/photos", "./photos")
+	router.File("/favicon.ico", "photos/favicon.ico")
 	router.GET("/", listRoot)
 	router.GET("/:path", listRoot)
 	router.GET("/:path/*", listRoot)
+	log.Printf("SERVER_PORT: %s", ServerPort)
+	log.Printf("SERVER_HOST: %s", ServerHost)
+	log.Printf("PHOTOS_PATH: %s", RootPath)
 	router.Logger.Fatal(router.Start(ServerPort))
 }
 
@@ -141,13 +141,15 @@ func getFiles(pageParam int, c echo.Context) Files {
 func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 	dir, err := os.Open(path.Join(fullPath, ctxPath))
 	if err != nil {
-		log.Fatalf("readDir Open: failed to open dir: %s", err)
+		log.Printf("readDir os.Open FAILED [%s] %s : %v", fullPath, ctxPath, err)
+		return nil, nil
 	}
 	defer dir.Close()
 
 	items, err := dir.Readdir(0)
 	if err != nil {
-		log.Fatalf("readDir Readdir: failed to read dir: %s", err)
+		log.Printf("readDir dir.Readdir FAILED [%s] %s : %v", fullPath, ctxPath, err)
+		return nil, nil
 	}
 
 	var dirs []Directory
@@ -174,13 +176,15 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 			if checkExtension(item.Name()) {
 				pic, err := os.Open(itemPath)
 				if err != nil {
-					log.Fatalf("failed to open pic: %v", item.Name())
+					log.Printf("failed to open pic: %v", item.Name())
+					return dirs, pics
 				}
 
 				mimeType := getMimeType(item.Name())
 				image, _, err := image.DecodeConfig(pic)
 				if err != nil {
-					log.Fatalf("%s: %v", item.Name(), err)
+					log.Printf("%s: %v", item.Name(), err)
+					return dirs, pics
 				}
 
 				exifInfo, exifErr := getExif(itemPath)
@@ -188,16 +192,15 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 					exifInfo = Exif{Lat: 0, Long: 0}
 				}
 				picture := Picture{
-					Name:     item.Name(),
-					Size:     item.Size(),
-					Type:     mimeType,
-					ModTime:  item.ModTime(),
-					Path:     fmt.Sprintf("/%s", path.Join("photos", ctxPath, item.Name())),
-					Thumb:    fmt.Sprintf("/%s", path.Join("photos", ctxPath, "thumbs", item.Name())),
-					Original: fmt.Sprintf("/%s", path.Join("photos", ctxPath, "original", item.Name())),
-					Width:    image.Width,
-					Height:   image.Height,
-					Exif:     exifInfo,
+					Name:    item.Name(),
+					Size:    item.Size(),
+					Type:    mimeType,
+					ModTime: item.ModTime(),
+					Path:    fmt.Sprintf("/%s", path.Join("photos", ctxPath, item.Name())),
+					Thumb:   fmt.Sprintf("/%s", path.Join("photos", ctxPath, "thumbs", item.Name())),
+					Width:   image.Width,
+					Height:  image.Height,
+					Exif:    exifInfo,
 				}
 				pics = append(pics, picture)
 			}
@@ -210,13 +213,13 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 func getFirstThumb(albumPath string) (string, int) {
 	dir, err := os.Open(albumPath)
 	if err != nil {
-		log.Fatalf("getFirstThumb: failed to open dir: %s", err)
+		log.Printf("getFirstThumb: failed to open dir: %s", err)
 	}
 	defer dir.Close()
 
 	items, err := dir.Readdir(0)
 	if err != nil {
-		log.Fatalf("failed to read dir: %s", err)
+		log.Printf("failed to read dir: %s", err)
 	}
 
 	return items[0].Name(), len(items)

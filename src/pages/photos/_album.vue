@@ -24,7 +24,7 @@
         <v-img
           :src="aPhoto.original"
           :alt="aPhoto.name"
-        ></v-img>
+        />
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-overlay>
@@ -44,6 +44,12 @@ export default {
   components: {
     PhotoCard
   },
+  data () {
+    return {
+      overlay: false,
+      aPhoto: ''
+    }
+  },
   computed: mapState({
     photos: state => state.photos.photos
   }),
@@ -56,10 +62,6 @@ export default {
         message: `Unable to fetch photos at this time: ${e}`
       })
     }
-  },
-  data () {
-    overlay: false
-    aPhoto: ''
   },
   methods: {
     showPhoto (photo) {
