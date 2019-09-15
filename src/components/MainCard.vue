@@ -3,6 +3,8 @@
     class="mx-auto my-2"
     :raised="raised"
     :width="width"
+    :to="morelink"
+    nuxt
   >
     <v-img
       class="white--text"
@@ -17,18 +19,6 @@
     <v-card-text>
       {{ text }}
     </v-card-text>
-
-    <v-card-actions>
-      <div class="flex-grow-1" />
-      <v-btn
-        text
-        color="deep-purple accent-4"
-        :to="morelink"
-        nuxt
-      >
-        Read
-      </v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 
@@ -52,8 +42,8 @@ export default {
       default: true
     },
     width: {
-      type: Number,
-      default: 350
+      type: String,
+      default: '350'
     },
     imgsrc: {
       type: String,

@@ -97,7 +97,7 @@ export default {
     return {
       title: 'Jason Kumpf',
       author: 'Jason Kumpf',
-      drawer: false,
+      drawer: true,
       miniVariant: false,
       items: [
         {
@@ -124,6 +124,16 @@ export default {
           icon: 'mdi-airplane',
           title: 'Travels',
           to: '/travels'
+        },
+        {
+          icon: 'mdi-panorama-horizontal',
+          title: 'WebVR',
+          to: '/panorama'
+        },
+        {
+          icon: 'mdi-map',
+          title: 'Maps',
+          to: '/maps'
         }
       ]
     }

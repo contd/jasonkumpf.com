@@ -5,7 +5,9 @@ export const state = () => ({
   folders: [],
   photo: {},
   panoramas: [],
-  panorama: {}
+  panorama: {},
+  travels: [],
+  travel: {}
 })
 
 export const mutations = {
@@ -23,6 +25,12 @@ export const mutations = {
   },
   SET_PANORAMA (state, panorama) {
     state.panorama = panorama
+  },
+  SET_TRAVELS (state, travels) {
+    state.travels = travels
+  },
+  SET_TRAVEL (state, travel) {
+    state.travel = travel
   }
 }
 
@@ -46,7 +54,18 @@ export const actions = {
   },
   fetchPanoramasByPath ({ commit }, path) {
     return PhotoService.getPanoramasByPath(path).then((resp) => {
-      commit('SET_PANORAMAS', resp.data)
+      commit('SET_PANORAMAS', resp.data.Pictures)
+    })
+  },
+  fetchTravels ({ commit }) {
+    return PhotoService.getTravels().then((resp) => {
+      commit('SET_TRAVELS', resp.data.Pictures)
+      commit('SET_FOLDERS', resp.data.Directories)
+    })
+  },
+  fetchTravelsByPath ({ commit }, path) {
+    return PhotoService.getTravelsByPath(path).then((resp) => {
+      commit('SET_TRAVELS', resp.data.Pictures)
     })
   }
 }

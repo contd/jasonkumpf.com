@@ -37,8 +37,9 @@ type Directory struct {
 
 // Exif picture data struct
 type Exif struct {
-	Lat  float64 `json:"lat"`
-	Long float64 `json:"long"`
+	Lat   float64   `json:"lat"`
+	Long  float64   `json:"long"`
+	Taken time.Time `json:"taken"`
 }
 
 // Picture struct is for picture objects
@@ -181,7 +182,7 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 				}
 
 				mimeType := getMimeType(item.Name())
-				image, _, err := image.DecodeConfig(pic)
+				img, _, err := image.DecodeConfig(pic)
 				if err != nil {
 					log.Printf("%s: %v", item.Name(), err)
 					return dirs, pics
@@ -189,7 +190,9 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 
 				exifInfo, exifErr := getExif(itemPath)
 				if exifErr != nil {
-					exifInfo = Exif{Lat: 0, Long: 0}
+					//t, _ := time.Parse(time.RFC3339, "2006-01-02T15:04:05Z")
+					t := time.Now()
+					exifInfo = Exif{Lat: 0, Long: 0, Taken: t}
 				}
 				picture := Picture{
 					Name:    item.Name(),
@@ -198,8 +201,8 @@ func readPath(fullPath string, ctxPath string) ([]Directory, []Picture) {
 					ModTime: item.ModTime(),
 					Path:    fmt.Sprintf("/%s", path.Join("photos", ctxPath, item.Name())),
 					Thumb:   fmt.Sprintf("/%s", path.Join("photos", ctxPath, "thumbs", item.Name())),
-					Width:   image.Width,
-					Height:  image.Height,
+					Width:   img.Width,
+					Height:  img.Height,
 					Exif:    exifInfo,
 				}
 				pics = append(pics, picture)
@@ -290,9 +293,11 @@ func getExif(fname string) (Exif, error) {
 	}
 
 	lat, long, _ := x.LatLong()
+	tm, _ := x.DateTime()
 
 	return Exif{
-		Lat:  lat,
-		Long: long,
+		Lat:   lat,
+		Long:  long,
+		Taken: tm,
 	}, nil
 }

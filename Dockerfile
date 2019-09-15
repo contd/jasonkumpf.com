@@ -15,10 +15,10 @@ COPY server.go .
 RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o server
 
 # Production image
-FROM golang:1.12-stretch
+FROM golang:1.12.9-stretch
 COPY --from=builder /app/server /app/
 ENV SERVER_PORT ":8088"
 ENV SERVER_HOST "localhost"
 VOLUME [ "/photos" ]
-EXPOSE 4444
+EXPOSE 8088
 ENTRYPOINT [ "/app/server" ]

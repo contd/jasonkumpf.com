@@ -57,7 +57,7 @@
     },
     {
       "company": "UC Infrastructure Institute",
-      "position": "Research Assistant and Web/Database/System Admin",
+      "position": "Research As. and Web/DB/Sys Admin",
       "website": "http://ceas.uc.edu/ucii",
       "startDate": "2008-09",
       "endDate": "2014-08",
@@ -107,8 +107,8 @@
       "area": "Information Engineering Technology",
       "studyType": "Bachelor of Science",
       "location": "Cincinnati, Ohio",
-      "startDate": "1999-09",
-      "endDate": "2001-06",
+      "startDate": "Sept, 1999",
+      "endDate": "June, 2001",
       "extras": [
         {
           "name": "Senior Capstone Project",
@@ -121,8 +121,8 @@
       "area": "Mechanical Engineering Technology",
       "studyType": "Bachelor of Science",
       "location": "Cincinnati, Ohio",
-      "startDate": "1994-09",
-      "endDate": "2001-06",
+      "startDate": "Sept, 1994",
+      "endDate": "June, 2001",
       "extras": [
         {
           "name": "Senior Capstone Project",
@@ -133,10 +133,10 @@
     {
       "institution": "University of Cincinnati",
       "area": "Electrical Engineering",
-      "studyType": "PhD (All But Dissertation)",
+      "studyType": "PhD - All But Dissertation",
       "location": "Cincinnati, Ohio",
-      "startDate": "2008-09",
-      "endDate": "2014-06",
+      "startDate": "Sept, 2008",
+      "endDate": "June, 2014",
       "extras": [
         {
           "name": "Relavant Coursework",

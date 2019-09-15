@@ -9,10 +9,10 @@
       tile
     >
       <PhotoCard
-        v-for="(photo, idx) in photos"
+        v-for="(travel, idx) in travels"
         :key="idx"
-        :photo="photo"
-        @show-img="showPhoto(photo)"
+        :photo="travel"
+        @show-img="showPhoto(travel)"
       />
       <fullscreen ref="fullscreen" @change="fullscreenChange">
         <v-card
@@ -42,7 +42,7 @@ Vue.use(fullscreen)
 export default {
   head () {
     return {
-      title: 'Photos'
+      title: 'Travels'
     }
   },
   components: {
@@ -55,15 +55,15 @@ export default {
     }
   },
   computed: mapState({
-    photos: state => state.photos.photos
+    travels: state => state.photos.travels
   }),
   async fetch ({ store, params, error }) {
     try {
-      await store.dispatch('photos/fetchPhotosByPath', params.album)
+      await store.dispatch('photos/fetchTravelsByPath', params.album)
     } catch (e) {
       error({
         statusCode: 503,
-        message: `Unable to fetch photos at this time: ${e}`
+        message: `Unable to fetch travels at this time: ${e}`
       })
     }
   },

@@ -21,5 +21,11 @@ export default {
   },
   getPanoramasByPath (path) {
     return apiClient.get('/panorama/' + path)
+  },
+  getTravels () {
+    return apiClient.get('/travels')
+  },
+  getTravelsByPath (path) {
+    return apiClient.get('/travels/' + path)
   }
 }

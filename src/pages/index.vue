@@ -25,10 +25,24 @@
     />
     <MainCard
       title="Travels"
-      text="Photos, panorama views and videos from my travels."
+      text="Photos, maps and videos from my travels."
       imgheight="200px"
       imgsrc="/img/mexico-front.jpg"
       morelink="/travels"
+    />
+    <MainCard
+      title="WebVR / Panoramas"
+      text="WebVR and Panorama views from my travels and other places."
+      imgheight="200px"
+      imgsrc="/img/monterrey-3-2015.jpg"
+      morelink="/panorama"
+    />
+    <MainCard
+      title="Maps"
+      text="Map with photo geolocated from my travels and other places."
+      imgheight="200px"
+      imgsrc="/img/monterrey-7-2015.jpg"
+      morelink="/maps"
     />
   </v-layout>
 </template>

@@ -12,6 +12,7 @@
         v-for="(folder, i) in folders"
         :key="i"
         :folder="folder"
+        base-path="photos"
       />
     </v-container>
   </v-layout>

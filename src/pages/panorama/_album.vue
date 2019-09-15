@@ -2,7 +2,6 @@
   <v-layout
     class="fill-height"
   >
-    </v-container>
     <v-container
       fluid
       class="d-flex flex-wrap mx-2 justify-space-around fill-height"
@@ -12,22 +11,12 @@
       <PhotoCard
         v-for="(panorama, idx) in panoramas"
         :key="idx"
+        :panoram="pano"
         :photo="panorama"
-        @click="showPhoto(panorama)"
+        @goto-pano="gotoPano(panorama)"
       />
+      </v-card>
     </v-container>
-    <v-overlay :value="overlay">
-      <v-btn
-        icon
-        @click="closeOverlay"
-      >
-        <v-img
-          :src="aPhoto.original"
-          :alt="aPhoto.name"
-        />
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-overlay>
   </v-layout>
 </template>
 
@@ -47,15 +36,16 @@ export default {
   data () {
     return {
       overlay: false,
+      pano: true,
       aPhoto: ''
     }
   },
   computed: mapState({
-    panoramas: state => state.panoramas.panoramas
+    panoramas: state => state.photos.panoramas
   }),
   async fetch ({ store, params, error }) {
     try {
-      await store.dispatch('panoramas/fetchPanoramasByPath', params.album)
+      await store.dispatch('photos/fetchPanoramasByPath', params.album)
     } catch (e) {
       error({
         statusCode: 503,
@@ -64,12 +54,8 @@ export default {
     }
   },
   methods: {
-    showPhoto (photo) {
-      this.aPhoto = photo
-      this.overlay = true
-    },
-    closeOverlay () {
-      this.overlay = false
+    gotoPano (panorama) {
+      this.$router.push(`/panorama/aframe/?imgPath=${panorama.path}`)
     }
   }
 }

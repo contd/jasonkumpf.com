@@ -30,7 +30,9 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    '~/plugins/googleMaps'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -50,12 +52,7 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-	axios: {
-		proxy: true
-	},
-	proxy: {
-		'/api': 'http://localhost:8088'
-	},
+  axios: {},
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
