@@ -74,7 +74,7 @@ var Pictures []Picture
 var PageLimit = 10
 
 // OriginsAllowed is for CORS and should leave the localhost there
-var OriginsAllowed = []string{"*"}
+var OriginsAllowed = []string{"https://jasonkumpf.com", "http://localhost:8088", "http://localhost:3000"}
 
 // ServerPort is the port Echo is running
 var ServerPort = os.Getenv("SERVER_PORT")
@@ -224,8 +224,12 @@ func getFirstThumb(albumPath string) (string, int) {
 	if err != nil {
 		log.Printf("failed to read dir: %s", err)
 	}
+	item := items[0].Name()
+	if item == "thumbs" {
+		item = items[1].Name()
+	}
 
-	return items[0].Name(), len(items)
+	return item, len(items)
 }
 
 func limitPics(p int, lim int) []Picture {

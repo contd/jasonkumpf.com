@@ -1,27 +1,22 @@
 <template>
-  <client-only>
-    <a-scene>
-      <a-sky
-        id="image-360"
-        radius="10"
-        :position="panoramaPosition"
-        :rotation="panoramaRotation"
-        :src="imgPath"
-      />
-    </a-scene>
-  </client-only>
+  <div
+    class="vuepano"
+  >
+    <Panorama
+      :source="imgPath"
+      @viewchange="onChange"
+    />
+  </div>
 </template>
 
 <script>
-if (process.browser) {
-  require('aframe')
-}
+import Panorama from '@/components/Panorama'
 
 export default {
   layout: 'aframe',
   head () {
     return {
-      title: '360° Viewer'
+      title: 'Vue Panorama Viewer'
     }
   },
   validate ({ params, query, error }) {
@@ -30,15 +25,28 @@ export default {
     }
     return true
   },
+  components: {
+    Panorama
+  },
   data () {
     return {
-      imgPath: '',
-      panoramaPosition: '',
-      panoramaRotation: ''
+      imgPath: ''
     }
   },
   created () {
     this.imgPath = (this.$route.query && this.$route.query.imgPath ? this.$route.query.imgPath : '')
+  },
+  methods: {
+    onChange (e, angle) {
+      console.log(e, angle)
+    }
   }
 }
 </script>
+
+<style>
+.vuepano {
+  height: 100vh;
+  width: 100vw;
+}
+</style>

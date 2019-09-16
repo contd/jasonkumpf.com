@@ -5,16 +5,34 @@ networks:
     external: true
 
 services:
+  jasonkumpf:
+    build: src/.
+    container_name: jasonkumpf
+    restart: always
+    volumes:
+      - ./src/dist:/code
+    labels:
+      - "traefik.backend=jasonkumpf"
+      - "traefik.domain=jasonkumpf.com"
+      - "traefik.frontend.rule=Host:jasonkumpf.com"
+      - "traefik.frontend.redirect.entryPoint=https"
+      - "traefik.docker.network=web"
+      - "traefik.port=5000"
+    networks:
+      - web
+
   jasonkumpfapi:
     build: .
     container_name: jasonkumpfapi
     restart: always
+    ports:
+      - 8088:8088
     environment:
       - SERVER_PORT=:8088
-      - SERVER_HOST=https://jasonkumpf.com
+      - SERVER_HOST=https://api.jasonkumpf.com
       - PHOTOS_PATH=/photos
     volumes:
-      - ./photos:/photos
+      - ./src/dist/photos:/photos
     labels:
       - "traefik.backend=jasonkumpfapi"
       - "traefik.domain=jasonkumpf.com"

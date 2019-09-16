@@ -29,12 +29,21 @@
   },
   "work": [
     {
+      "company": "Roundtower",
+      "position": "Desktop Support Admin",
+      "website": "https://roundtower.com",
+      "startDate": "March, 2019",
+      "endDate": "Sept, 2019",
+      "location": "Rockville, MD",
+      "summary": "The client support services team needed a desktop support on-site lead for a customer and as a favor to the team lead who is my brother-in-law agreed to contract the position until they found a full time replacement. Responsibilities included supporting all aspects of building and maintaining IT equipment and over 300 employees at the client location (CNSI - Rockville, MD). Other responsibilities included data center equipment maintenance and monitoring."
+    },
+    {
       "company": "Senseye",
       "position": "Software Engineer",
       "website": "https://senseye.io",
       "startDate": "2017-11",
       "endDate": "2018-12",
-      "location": "FUlly Remote (Southampton, UK)",
+      "location": "Fully Remote (Southampton, UK)",
       "summary": "Worked with both customers and other developers to develop various tools and additions to the data ingestion pipeline, which fed the main product. Worked heavily on and with micro-services and AWS in a fast-paced, scrum driven, fully remote and very agile development team. Being remote for 90% of the team, communication and documentation was vital. During a transition of project management, my team began the switch to TypeScript and more sophisticated AWS/ECS integration for both testing and continuous integration."
     },
     {
@@ -263,6 +272,24 @@
       "website": "http://ascelibrary.org/doi/abs/10.1061/(ASCE)BE.1943-5592.0000365",
       "website2": "http://www.researchgate.net/publication/257921037_Automated_Ice_Inference_and_Monitoring_on_the_Veterans_Glass_City_Skyway_Bridge",
       "summary": "Under certain weather conditions, the Veterans’ Glass City Skyway (VGCS) Bridge in Toledo, Ohio, accumulates ice on the stay sheaths in such a way that has led to large fragments falling into traffic lanes. To aid the Ohio Department of Transportation (ODOT) in their response to this, an automatic inference and monitoring system was implemented. This system utilizes existing weather station measurement data to infer possible events, alerting officials and providing tools to further assess the situation. The development of the decision, the algorithm, and implementation process are presented. The system was implemented in January 2011, and it warned of and monitored an icing event that occurred February 20–24, 2011. Ice fell shortly after the system indicated conditions were met for icefall. ODOT personnel used the ice inference system to assist them in managing the response to the icing event.   Read More: http://ascelibrary.org/doi/abs/10.1061/(ASCE)BE.1943-5592.0000365"
+    },
+    {
+      "authors": "G Kimmel, J Kumpf, V Hunt, J Swanson, A Helmicki",
+      "year": "2009",
+      "title": "Automated Health Monitoring of an Aged and Deteriorated Truss",
+      "publication": "Fall Conference & Quality Testing Show 2009",
+      "publisher": "Fall Conference & Quality Testing Show 2009",
+      "releaseDate": "2009-01-01",
+      "summary": ""
+    },
+    {
+      "authors": "M Norouzi, J Kumpf, V Hunt, A Helmicki",
+      "year": "2012",
+      "title": "An integrated monitor and warning system for the Jeremiah Morrow bridge",
+      "publication": "Structural Materials Technology",
+      "publisher": "Structural Materials Technology",
+      "releaseDate": "2012-01-01",
+      "summary": ""
     }
   ],
   "languages": [

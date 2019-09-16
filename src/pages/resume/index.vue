@@ -81,6 +81,12 @@
       </h1>
       <v-divider />
     </v-container>
+    <v-container>
+      <h1>
+        Publications
+      </h1>
+      <v-divider />
+    </v-container>
   </v-layout>
 </template>
 
@@ -100,12 +106,13 @@ export default {
   },
   data () {
     return {
-      sections: ['basics', 'work', 'education', 'skills', 'publications', 'interests'],
+      sections: ['basics', 'work', 'education', 'skills', 'publications'],
       resume: {},
       basics: {},
       work: [],
       education: [],
-      skills: []
+      skills: [],
+      publications: []
     }
   },
   mounted () {
@@ -114,6 +121,7 @@ export default {
     this.work = this.resume.work
     this.education = this.resume.education
     this.skills = this.resume.skills
+    this.publications = this.resume.publications
   }
 }
 </script>

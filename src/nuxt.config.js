@@ -26,12 +26,14 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    'leaflet/dist/leaflet.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/googleMaps'
+    {src: '~plugins/vue-leaflet.js', ssr: false}
   ],
   /*
    ** Nuxt.js dev-modules
@@ -78,6 +80,7 @@ export default {
    ** Build configuration
    */
   build: {
+    vendor: ['aframe'],
     /*
      ** You can extend webpack config here
      */

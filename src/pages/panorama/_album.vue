@@ -55,7 +55,11 @@ export default {
   },
   methods: {
     gotoPano (panorama) {
-      this.$router.push(`/panorama/aframe/?imgPath=${panorama.path}`)
+      if (panorama.path.startsWith('/photos/panorama/puerto_vallarta_2014')) {
+        this.$router.push(`/panorama/vuepano/?imgPath=${panorama.path}`)
+      } else {
+        this.$router.push(`/panorama/aframe/?imgPath=${panorama.path}`)
+      }
     }
   }
 }
