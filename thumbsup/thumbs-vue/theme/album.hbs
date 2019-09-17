@@ -1,0 +1,239 @@
+<template>
+  <v-layout
+    fluid
+    class="d-flex flex-row flex-wrap justify-space-around"
+  >
+    <v-container>
+      <NavBar
+        v-for="(album, idx) in albums"
+        :key="idx"
+      ></NavBar>
+    </v-container>
+    <router-view>
+      <v-container
+        fluid
+        class="d-flex flex-row flex-wrap justify-space-around"
+      >
+        <v-row>
+          <v-col cols="12">
+            <h1 class="display-1">
+              {{album.title}}
+            </h1>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            cols="12"
+            class="d-flex child-flex"
+          >
+            <AlbumCard
+              v-for="(album, idx) in albums"
+              :key="idx"
+            ></AlbumCard>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            cols="12"
+            class="d-flex child-flex"
+          >
+            <ThumbnailCard
+              v-for="(file, idx) in files"
+              :key="idx"
+            ></ThumbnailCard>
+          </v-col>
+        </v-row>
+      </v-container>
+    </router-view>
+  </v-layout>
+</template>
+
+<script>
+import Vue from 'vue'
+{{#each album.albums}}
+import {{component title}} from '@/views/{{component title}}'
+{{/each}}
+
+const routes = [
+{{#each album.albums}}
+  { path: '/{{vuepath (relative url)}}', component: '{{component title}}'},
+{{/each}}
+]
+
+const router = new VueRouter({
+  routes
+})
+
+Vue.component('NavBar', {
+  template: `
+<router-link :to="album.path" :component="album.component">
+  {{ album.title }}
+</router-link>`})
+
+Vue.component('AlbumCard', {
+  template: `
+<v-card
+  max-width="344"
+  class="mx-auto"
+  :to="album.url"
+>
+  <v-list-item>
+    <v-list-item-avatar>
+      {{ album.thumbnail }}
+    </v-list-item-avatar>
+    <v-list-item-content>
+      <v-list-item-title class="headline">
+        {{ album.title }}
+      </v-list-item-title>
+    </v-list-item-content>
+  </v-list-item>
+  <v-img
+    src=""
+    height="194"
+  />
+  <v-card-text>
+    Photos: {{ album.photos }}
+    Videos: {{ album.videos }}
+    From: {{ album.from }}
+    To: {{ album.to }}
+  </v-card-text>
+  <v-card-actions>
+    <v-btn icon>
+      <v-icon>mdi-share-variant</v-icon>
+    </v-btn>
+  </v-card-actions>
+</v-card>
+`})
+
+Vue.component('ThumbnailCard', {
+  template: `
+<v-card
+  flat
+  tile
+  class="d-flex"
+  @click="showImage(file.path)"
+>
+  <v-img
+    :src="file.thumbnail"
+    aspect-ratio="1"
+    class="grey lighten-2"
+    :alt="file.filename"
+  >
+    <template v-slot:placeholder>
+      <v-row
+        class="fill-height ma-0"
+        align="center"
+        justify="center"
+      >
+        <v-progress-circular indeterminate color="grey lighten-5" />
+      </v-row>
+    </template>
+  </v-img>
+  <v-card-actions>
+    <v-btn
+      icon
+      @click="show = !show"
+      :icon="chevToggle"
+    >
+    </v-btn>
+  </v-card-actions>
+  <v-expand-transition>
+    <div v-show="show">
+      <v-card-text>
+        <div>
+          {{ file.date }} - w:{{ file.width }} h:{{ file.height }}
+        </div>
+        <div>
+          <a :href="file.original">Original</a>
+        </div>
+          <v-list>
+            <v-list-item-group>
+              <v-list-item>
+                <v-list-item-content>
+                  DateTime: {{ file.datetime }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  Latitude: {{ file.latitude }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  Longitude: {{ file.longitude }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  RefLatitude: {{ file.reflatitude }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  RefLongitude: {{ file.reflongitude }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  Altitude: {{ file.altitude }}
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+      </v-card-text>
+    </div>
+  </v-expand-transition>
+</v-card>`})
+
+export default {
+  data: () => ({
+    show: false,
+    title: '{{album.title}}',
+    albums: [
+    {{#each album.albums}}
+      {
+        title: '{{title}}',
+        path: '/{{vuepath (relative url)}}',
+        component: '{{component title}}',
+        thumbnail: '{{relative previews.0.urls.large}}',
+        photos: '{{stats.photos}}',
+        videos: '{{stats.videos}}',
+        from: '{{{date stats.fromDate}}}',
+        to: '{{{date stats.toDate}}}'
+      },
+    {{/each}}
+    ],
+    files: [
+    {{#each album.files}}
+      {
+        filename: '{{filename}}',
+        path: '{{fixlink (relative urls.large)}}',
+        thumbnail: '{{fixlink (relative urls.thumbnail)}}',
+        original: '{{fixlink (relative urls.download)}}',
+        width: '{{meta.width}}',
+        height: '{{meta.height}}',
+        {{#if meta.exif}}
+        datetime: '{{meta.exif.DateTimeOriginal}}',
+        latitude: '{{meta.exif.GPSLatitude}}',
+        longitude: '{{meta.exif.GPSLongitude}}',
+        reflatitude: '{{meta.exif.GPSLatitudeRef}}',
+        reflongitude: '{{meta.exif.GPSLongitudeRef}}',
+        altitude:' {{meta.exif.GPSAltitude}}',
+        {{/if}}
+        date: '{{date}}'
+      },
+    {{/each}}
+    ]
+  }),
+  computed: {
+    chevToggle() {
+      return (this.show ? 'mdi-chevron-up' : 'mdi-chevron-down')
+    }
+  },
+  methods: {
+    showImage (path) {
+      // show in fullscreen/overlay
+    }
+  }
+}
+</script>

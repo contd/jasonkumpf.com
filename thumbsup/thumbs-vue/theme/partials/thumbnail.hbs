@@ -1,0 +1,79 @@
+<v-card
+  v-for="(file, idx) in files"
+  :key="idx"
+  flat
+  tile
+  class="d-flex"
+  @click="showImage(path)"
+>
+  <v-img
+    :src="thumbnail"
+    aspect-ratio="1"
+    class="grey lighten-2"
+    :alt="filename"
+  >
+    <template v-slot:placeholder>
+      <v-row
+        class="fill-height ma-0"
+        align="center"
+        justify="center"
+      >
+        <v-progress-circular indeterminate color="grey lighten-5" />
+      </v-row>
+    </template>
+  </v-img>
+  <v-card-actions>
+    <v-btn
+      icon
+      @click="show = !show"
+      :icon="chevToggle"
+    >
+    </v-btn>
+  </v-card-actions>
+  <v-expand-transition>
+    <div v-show="show">
+      <v-card-text>
+        <div>
+          {{ date }} - w:{{ width }} h:{{ height }}
+        </div>
+        <div>
+          <a :href="original">Original</a>
+        </div>
+          <v-list>
+            <v-list-item-group>
+              <v-list-item>
+                <v-list-item-content>
+                  DateTime: {{ datetime }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  Latitude: {{ latitude }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  Longitude: {{ longitude }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  RefLatitude: {{ reflatitude }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  RefLongitude: {{ reflongitude }}
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  Altitude: {{ altitude }}
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+      </v-card-text>
+    </div>
+  </v-expand-transition>
+</v-card>

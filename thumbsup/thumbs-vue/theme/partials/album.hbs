@@ -1,0 +1,31 @@
+<v-card
+  v-for="(album, idx) in albums"
+  :key="idx"
+  max-width="344"
+  class="mx-auto"
+  :to="`/${title}`"
+>
+  <v-list-item>
+    <v-list-item-avatar color="grey"></v-list-item-avatar>
+    <v-list-item-content>
+      <v-list-item-title class="headline">
+        {{ title }}
+      </v-list-item-title>
+    </v-list-item-content>
+  </v-list-item>
+  <v-img
+    src=""
+    height="194"
+  />
+  <v-card-text>
+    Photos: {{ photos }}
+    Videos: {{ videos }}
+    From: {{ from }}
+    To: {{ to }}
+  </v-card-text>
+  <v-card-actions>
+    <v-btn icon>
+      <v-icon>mdi-share-variant</v-icon>
+    </v-btn>
+  </v-card-actions>
+</v-card>

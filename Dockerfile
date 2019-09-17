@@ -10,7 +10,7 @@ COPY go.sum .
 
 RUN go mod download
 
-COPY server.go .
+COPY server/server.go .
 
 RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o server
 
@@ -18,7 +18,7 @@ RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o server
 FROM golang:1.12.9-stretch
 COPY --from=builder /app/server /app/
 ENV SERVER_PORT ":8088"
-ENV SERVER_HOST "localhost"
+ENV SERVER_HOST "0.0.0.0"
 VOLUME [ "/photos" ]
 EXPOSE 8088
 ENTRYPOINT [ "/app/server" ]

@@ -1,0 +1,18 @@
+{
+  "input": "/home/jason/current-projects/web-designs/photos/travels",
+  "output": "./photos/travels",
+  "title": "Travels",
+  "thumb-size": 200,
+  "large-size": 1500,
+  "photo-download": "copy",
+  "photo-quality": 100,
+  "include-raw-photos": false,
+  "video-download": "copy",
+  "video-preview": "copy",
+  "video-quality": 100,
+  "video-format": "webm",
+  "sort-albums-by": "start-date",
+  "theme-path": "./thumbs-vue",
+  "embed-exif": true,
+  "usage-stats": false
+}

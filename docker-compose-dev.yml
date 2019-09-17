@@ -1,4 +1,4 @@
-version: "3.1"
+version: '3.1'
 
 networks:
   web:
@@ -10,15 +10,15 @@ services:
     container_name: jasonkumpfapidev
     restart: always
     ports:
-      - "8088:8088"
+      - 8088:8088
     environment:
       - SERVER_PORT=:8088
       - SERVER_HOST=http://localhost
       - PHOTOS_PATH=/photos
     volumes:
-      - ./photos:/photos
+      - ./client/static/photos:/photos
     labels:
-      - traefik.enable=false
+      - "traefik.enable=false"
     networks:
       - web
 
