@@ -7,7 +7,6 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 	"log"
-	"math/rand"
 	"mime"
 	"net/http"
 	"os"
@@ -15,7 +14,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"sort"
-	"strconv"
 	s "strings"
 	"time"
 
@@ -70,9 +68,6 @@ var Directories []Directory
 // Pictures is an array of Picture objects in current path
 var Pictures []Picture
 
-// PageLimit is the number of items per page
-var PageLimit = 10
-
 // OriginsAllowed is for CORS and should leave the localhost there
 var OriginsAllowed = []string{"https://jasonkumpf.com", "http://localhost:8088", "http://localhost:3000"}
 
@@ -111,16 +106,12 @@ func main() {
 }
 
 func listRoot(c echo.Context) error {
-	pageParam, _ := strconv.Atoi(c.QueryParam("page"))
-	if pageParam == 0 {
-		pageParam = 1
-	}
-	files := getFiles(pageParam, c)
+	ctxPath := s.Join(c.ParamValues(), "/")
+	files := getFiles(ctxPath)
 	return c.JSON(http.StatusOK, files)
 }
 
-func getFiles(pageParam int, c echo.Context) Files {
-	ctxPath := s.Join(c.ParamValues(), "/")
+func getFiles(ctxPath string) Files {
 	Directories, Pictures = readPath(RootPath, ctxPath)
 
 	sort.SliceStable(Directories, func(i, j int) bool {
@@ -129,8 +120,6 @@ func getFiles(pageParam int, c echo.Context) Files {
 	sort.SliceStable(Pictures, func(i, j int) bool {
 		return Pictures[i].Name < Pictures[j].Name
 	})
-	// Limit (Paging)
-	//Pictures = limitPics(pageParam, PageLimit)
 
 	files := Files{
 		Directories: Directories,
@@ -230,41 +219,6 @@ func getFirstThumb(albumPath string) (string, int) {
 	}
 
 	return item, len(items)
-}
-
-func limitPics(p int, lim int) []Picture {
-	e := p * lim
-	s := e - lim
-	if e > len(Pictures) {
-		e = len(Pictures)
-	}
-	var rangePics []Picture
-
-	for i := s; i < e; i++ {
-		//log.Printf("I: %v - LEN: %v", i, len(Pictures))
-		rangePics = append(rangePics, Pictures[i])
-	}
-
-	return rangePics
-}
-
-func randPics(n int) []Picture {
-	var randPics []Picture
-	rand.Seed(time.Now().UnixNano())
-
-	for i := 0; i < n; i++ {
-		pick := Pictures[rand.Intn(len(Pictures))]
-		randPics = append(randPics, pick)
-	}
-
-	return randPics
-}
-
-func widthOrHeight(w int, h int) string {
-	if w > h {
-		return "width"
-	}
-	return "height"
 }
 
 func checkExtension(fname string) bool {

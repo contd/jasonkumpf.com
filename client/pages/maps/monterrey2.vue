@@ -26,17 +26,34 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import GeoJsonService from '@/services/GeoJsonService'
+import GeoJsonPopup from '@/components/GeoJsonPopup'
+
+function onEachFeature (feature, layer) {
+  const GeoJsonPop = Vue.extend(GeoJsonPopup)
+  const popup = new GeoJsonPop({
+    propsData: {
+      name: feature.properties.name.replace(/\.jpg$/, '').replace(/\.jpeg$/, ''),
+      taken: feature.properties.taken,
+      thumb: feature.properties.thumb,
+      path: feature.properties.path
+    }
+  })
+  layer.bindPopup(popup.$mount().$el)
+}
+
 export default {
-  name: 'Monterrey072015',
+  name: 'Monterrey032015',
   head () {
     return {
-      title: 'Monterrey - July 2015'
+      title: 'Monterrey - March 2015'
     }
   },
   data () {
     return {
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      zoom: 11,
+      zoom: 12,
       center: [25.6848304, -100.3126147],
       bounds: null,
       enableTooltip: true,
@@ -46,12 +63,22 @@ export default {
   computed: {
     options () {
       return {
-        // onEachFeature
+        onEachFeature
       }
     }
   },
-  created () {
-    this.geojson = null // monterrey2014
+  async asyncData ({ error }) {
+    try {
+      const resp = await GeoJsonService.getGeoJson('Monterrey-2015-03')
+      return {
+        geojson: resp
+      }
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: `Unable to fetch geojson at this time: ${e}`
+      })
+    }
   },
   methods: {
     zoomUpdated (zoom) {

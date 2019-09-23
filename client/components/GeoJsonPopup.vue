@@ -1,9 +1,14 @@
 <template>
   <div>
     <div class="subtitle-2">
-      {{ icnNum }}. {{ name }}
+      {{ name }}
     </div>
-    <div v-html="text" />
+    <div v-if="text" v-html="text" />
+    <div v-else>
+      <a :href="path" target="_new">
+        <img :src="thumb" :alt="thumb" />
+      </a>
+    </div>
   </div>
 </template>
 
@@ -11,11 +16,19 @@
 export default {
   name: 'GeoJson2Popup',
   props: {
-    icnNum: {
+    name: {
       type: String,
       default: ''
     },
-    name: {
+    thumb: {
+      type: String,
+      default: ''
+    },
+    taken: {
+      type: String,
+      default: ''
+    },
+    path: {
       type: String,
       default: ''
     },

@@ -27,33 +27,34 @@
 
 <script>
 import Vue from 'vue'
+import GeoJsonService from '@/services/GeoJsonService'
 import GeoJsonPopup from '@/components/GeoJsonPopup'
-const monterrey2014 = require('@/services/Monterrey-Sep-2014.json')
 
 function onEachFeature (feature, layer) {
   const GeoJsonPop = Vue.extend(GeoJsonPopup)
   const popup = new GeoJsonPop({
     propsData: {
-      icnNum: feature.properties.icon,
-      name: feature.properties.name,
-      text: feature.properties.description
+      name: feature.properties.name.replace(/\.jpg$/, '').replace(/\.jpeg$/, ''),
+      taken: feature.properties.taken,
+      thumb: feature.properties.thumb,
+      path: feature.properties.path
     }
   })
   layer.bindPopup(popup.$mount().$el)
 }
 
 export default {
-  name: 'Monterrey2014',
+  name: 'Colima',
   head () {
     return {
-      title: 'Monterrey - August 2014'
+      title: 'Colima - March 2018'
     }
   },
   data () {
     return {
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      zoom: 11,
-      center: [25.6848304, -100.3126147],
+      zoom: 8,
+      center: [20.373829, -103.576461],
       bounds: null,
       enableTooltip: true,
       geojson: null
@@ -66,8 +67,18 @@ export default {
       }
     }
   },
-  created () {
-    this.geojson = monterrey2014
+  async asyncData ({ error }) {
+    try {
+      const resp = await GeoJsonService.getGeoJson('Colima')
+      return {
+        geojson: resp
+      }
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: `Unable to fetch geojson at this time: ${e}`
+      })
+    }
   },
   methods: {
     zoomUpdated (zoom) {
