@@ -76,15 +76,41 @@
       </v-card>
     </v-container>
     <v-container>
-      <h1>
-        Skills
-      </h1>
+      <v-card
+        v-for="(skill, i) in skills"
+        :key="i"
+        class="mb-1"
+      >
+        <v-card-title>
+          {{ skill.name }} <span class="grey--text subtitle-1">{{ skill.level }}</span>
+        </v-card-title>
+        <v-card-text>
+          <v-chip
+            v-for="(kw, j) in skill.keywords"
+            :key="j"
+            class="ma-2"
+            :color="colors[j]"
+            text-color="white"
+          >
+            {{ kw }}
+          </v-chip>
+        </v-card-text>
+      </v-card>
       <v-divider />
     </v-container>
     <v-container>
-      <h1>
-        Publications
-      </h1>
+      <v-card
+        v-for="(pub, i) in publications"
+        :key="i"
+        class="mb-1"
+      >
+        <v-card-text>
+          {{ pub.title }}, {{ pub.authors }}, {{ pub.publication }}, {{ pub.year }}
+          <a v-if="pub.website" :href="pub.website">{{ pub.website }}</a>
+          <a v-if="pub.website2" :href="pub.website2">{{ pub.website2 }}</a>
+          <span v-if="pub.summary">{{ pub.summary }}</span>
+        </v-card-text>
+      </v-card>
       <v-divider />
     </v-container>
   </v-layout>
@@ -107,6 +133,7 @@ export default {
   data () {
     return {
       sections: ['basics', 'work', 'education', 'skills', 'publications'],
+      colors: ['primary', 'secondary', 'red', 'green', 'orange'],
       resume: {},
       basics: {},
       work: [],
