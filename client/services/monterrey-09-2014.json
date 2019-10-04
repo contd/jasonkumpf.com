@@ -1,0 +1,560 @@
+{
+  "type": "FeatureCollection",
+  "features": [{
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.114658, 25.776895, 0]
+      },
+      "properties": {
+        "name": "Monterrey Intl. (MTY) Terminal A",
+        "icon": "1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.312434, 25.743225, 0]
+      },
+      "properties": {
+        "name": "First Meal",
+        "icon": "2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.301902, 25.744207, 0]
+      },
+      "properties": {
+        "name": "Wyndham Garden Monterrey Norte",
+        "icon": "3"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.30192, 25.742807, 0]
+      },
+      "properties": {
+        "name": "Lunch on First Day",
+        "icon": "4"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.302751, 25.739882, 0]
+      },
+      "properties": {
+        "name": "Met at Subway Station",
+        "icon": "5"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-100.3126, 25.66734, 0],
+          [-100.31195, 25.66721, 0],
+          [-100.31141, 25.66715, 0],
+          [-100.31088, 25.66707, 0]
+        ]
+      },
+      "properties": {
+        "name": "Start walk through Plaza Morelos",
+        "stroke": "#0017ff",
+        "stroke-opacity": 1,
+        "stroke-width": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.312606, 25.667332, 0]
+      },
+      "properties": {
+        "name": "Plaza Morelos 1",
+        "icon": "6"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.312125, 25.667217, 0]
+      },
+      "properties": {
+        "name": "Plaza Mexico",
+        "icon": "8"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.312388, 25.667291, 0]
+      },
+      "properties": {
+        "name": "Palza Morelos",
+        "icon": "7"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.311326, 25.667083, 0]
+      },
+      "properties": {
+        "name": "Plaza Morelos 3",
+        "icon": "9"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.310884, 25.667066, 0]
+      },
+      "properties": {
+        "name": "Enter Park Walk",
+        "icon": "10"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-100.310884, 25.667066, 0],
+          [-100.310681, 25.667031, 0],
+          [-100.310253, 25.667288, 0],
+          [-100.3101, 25.667385, 0],
+          [-100.310059, 25.66746, 0],
+          [-100.309892, 25.667521, 0],
+          [-100.309847, 25.667694, 0],
+          [-100.309835, 25.667834, 0],
+          [-100.309973, 25.66801, 0],
+          [-100.309887, 25.668561, 0],
+          [-100.309856, 25.668701, 0],
+          [-100.309726, 25.66877, 0],
+          [-100.309693, 25.668969, 0],
+          [-100.309718, 25.669059, 0],
+          [-100.30951, 25.669176, 0],
+          [-100.309546, 25.669206, 0],
+          [-100.309512, 25.669396, 0],
+          [-100.309517, 25.669463, 0],
+          [-100.309742, 25.669496, 0],
+          [-100.309538, 25.669492, 0],
+          [-100.309698, 25.669692, 0],
+          [-100.30966, 25.669991, 0],
+          [-100.309709, 25.670167, 0],
+          [-100.309651, 25.670294, 0],
+          [-100.309281, 25.670669, 0],
+          [-100.309184, 25.670716, 0],
+          [-100.309237, 25.670831, 0],
+          [-100.309175, 25.670952, 0],
+          [-100.309217, 25.671044, 0]
+        ]
+      },
+      "properties": {
+        "name": "First Walk to First Picture",
+        "stroke": "#0017ff",
+        "stroke-opacity": 1,
+        "stroke-width": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.309217, 25.671044, 0]
+      },
+      "properties": {
+        "name": "My First Kodak Moments",
+        "icon": "11",
+        "description": "<img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-001.jpg\" height=\"200\" width=\"auto\" /><img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-004.jpg\" height=\"200\" width=\"auto\" />"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-100.309217, 25.671044, 0],
+          [-100.309254, 25.671093, 0],
+          [-100.309383, 25.671126, 0],
+          [-100.309486, 25.671204, 0],
+          [-100.309447, 25.671267, 0],
+          [-100.309384, 25.671353, 0],
+          [-100.309231, 25.671534, 0],
+          [-100.308982, 25.671568, 0],
+          [-100.308455, 25.671516, 0],
+          [-100.308074, 25.671438, 0],
+          [-100.308015, 25.671337, 0],
+          [-100.307854, 25.67143, 0],
+          [-100.307712, 25.671573, 0],
+          [-100.307446, 25.67155, 0],
+          [-100.307385, 25.671422, 0],
+          [-100.30717, 25.671416, 0],
+          [-100.307149, 25.671565, 0],
+          [-100.306843, 25.671549, 0]
+        ]
+      },
+      "properties": {
+        "name": "Second Walk toward Water",
+        "stroke": "#4400ff",
+        "stroke-opacity": 1,
+        "stroke-width": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-100.306843, 25.671549, 0],
+          [-100.306874, 25.671198, 0],
+          [-100.306491, 25.671181, 0],
+          [-100.306223, 25.671206, 0],
+          [-100.305982, 25.67104, 0],
+          [-100.305854, 25.670928, 0],
+          [-100.305824, 25.670735, 0]
+        ]
+      },
+      "properties": {
+        "name": "Begin Water Walk",
+        "stroke": "#ff0000",
+        "stroke-opacity": 1,
+        "stroke-width": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-100.305824, 25.670735, 0],
+          [-100.30571, 25.670621, 0],
+          [-100.305475, 25.67057, 0],
+          [-100.305401, 25.670607, 0],
+          [-100.305378, 25.670721, 0],
+          [-100.305264, 25.670797, 0],
+          [-100.305115, 25.67074, 0],
+          [-100.305067, 25.670697, 0],
+          [-100.3049, 25.670778, 0],
+          [-100.304705, 25.670877, 0],
+          [-100.304555, 25.670953, 0],
+          [-100.304537, 25.670998, 0]
+        ]
+      },
+      "properties": {
+        "name": "More Water Walk",
+        "stroke": "#ff5500",
+        "stroke-opacity": 1,
+        "stroke-width": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.30163, 25.672331, 0]
+      },
+      "properties": {
+        "name": "Another Kodak Moment",
+        "icon": "12",
+        "description": "<img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-006.jpg\" height=\"200\" width=\"auto\" />"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-100.304537, 25.670998, 0],
+          [-100.304232, 25.671115, 0],
+          [-100.303473, 25.671262, 0],
+          [-100.303223, 25.671262, 0],
+          [-100.302976, 25.671318, 0],
+          [-100.302748, 25.671434, 0],
+          [-100.302542, 25.671702, 0],
+          [-100.302429, 25.671872, 0],
+          [-100.302231, 25.671983, 0],
+          [-100.302046, 25.672164, 0],
+          [-100.301783, 25.672312, 0],
+          [-100.301515, 25.672399, 0],
+          [-100.301252, 25.672459, 0],
+          [-100.300938, 25.672565, 0],
+          [-100.30075, 25.672594, 0],
+          [-100.300498, 25.672604, 0],
+          [-100.300165, 25.672503, 0],
+          [-100.299841, 25.672469, 0],
+          [-100.299189, 25.672464, 0],
+          [-100.298974, 25.672462, 0],
+          [-100.29873, 25.672452, 0],
+          [-100.298548, 25.672491, 0],
+          [-100.298213, 25.6728, 0],
+          [-100.297682, 25.672781, 0]
+        ]
+      },
+      "properties": {
+        "name": "Picture 1 Water Walk",
+        "stroke": "#ffaa00",
+        "stroke-opacity": 1,
+        "stroke-width": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.29354, 25.673283, 0]
+      },
+      "properties": {
+        "name": "Oohh Pretty",
+        "icon": "13",
+        "description": "<img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-007.jpg\" height=\"200\" width=\"auto\" />"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-100.297682, 25.672781, 0],
+          [-100.297226, 25.673051, 0],
+          [-100.296846, 25.673147, 0],
+          [-100.29655, 25.673189, 0],
+          [-100.296324, 25.67331, 0],
+          [-100.295944, 25.673525, 0],
+          [-100.295525, 25.673648, 0],
+          [-100.294938, 25.673651, 0],
+          [-100.294549, 25.673595, 0],
+          [-100.294179, 25.673465, 0],
+          [-100.293758, 25.673288, 0],
+          [-100.29343, 25.673308, 0],
+          [-100.293135, 25.673315, 0],
+          [-100.292929, 25.673196, 0],
+          [-100.292765, 25.672979, 0],
+          [-100.292564, 25.672858, 0],
+          [-100.292462, 25.672848, 0],
+          [-100.292306, 25.672872, 0],
+          [-100.292154, 25.672831, 0],
+          [-100.291899, 25.672947, 0],
+          [-100.291735, 25.673063, 0],
+          [-100.291636, 25.67315, 0],
+          [-100.291505, 25.67317, 0],
+          [-100.291397, 25.673257, 0],
+          [-100.291282, 25.673334, 0],
+          [-100.291142, 25.673324, 0],
+          [-100.291014, 25.673409, 0],
+          [-100.29089, 25.673445, 0],
+          [-100.290796, 25.673443, 0],
+          [-100.290719, 25.673474, 0],
+          [-100.290628, 25.67352, 0],
+          [-100.290542, 25.67353, 0],
+          [-100.290424, 25.673508, 0],
+          [-100.290188, 25.673574, 0],
+          [-100.289702, 25.67374, 0],
+          [-100.289324, 25.674028, 0],
+          [-100.288981, 25.674371, 0],
+          [-100.288935, 25.674608, 0],
+          [-100.288986, 25.674797, 0],
+          [-100.288844, 25.674939, 0],
+          [-100.288688, 25.675034, 0],
+          [-100.288531, 25.67516, 0],
+          [-100.288324, 25.675269, 0],
+          [-100.288173, 25.675254, 0],
+          [-100.288053, 25.675203, 0],
+          [-100.287644, 25.67515, 0],
+          [-100.287331, 25.675101, 0],
+          [-100.287149, 25.674966, 0],
+          [-100.287138, 25.675055, 0],
+          [-100.286985, 25.675126, 0],
+          [-100.286956, 25.675278, 0],
+          [-100.287157, 25.675307, 0]
+        ]
+      },
+      "properties": {
+        "name": "Last Part Water Walk",
+        "stroke": "#ffff00",
+        "stroke-opacity": 1,
+        "stroke-width": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-100.287157, 25.675307, 0],
+          [-100.286703, 25.675345, 0],
+          [-100.286196, 25.675534, 0],
+          [-100.285394, 25.675599, 0],
+          [-100.284314, 25.675672, 0],
+          [-100.284088, 25.675384, 0],
+          [-100.28297, 25.675142, 0],
+          [-100.281964, 25.675225, 0],
+          [-100.282203, 25.675266, 0]
+        ]
+      },
+      "properties": {
+        "name": "Park Walk to Candid Picture Time",
+        "stroke": "#aaff00",
+        "stroke-opacity": 1,
+        "stroke-width": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.282959, 25.675807, 0]
+      },
+      "properties": {
+        "name": "Museo del Acero",
+        "icon": "14",
+        "description": "<img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-008.jpg\" height=\"200\" width=\"auto\" /><img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-009.jpg\" height=\"200\" width=\"auto\" />"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.282066, 25.675374, 0]
+      },
+      "properties": {
+        "name": "Too Pretty for Pictures",
+        "icon": "15",
+        "description": "<img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-010.jpg\" height=\"200\" width=\"auto\" /><img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-011.jpg\" height=\"200\" width=\"auto\" />"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.2847, 25.680722, 0]
+      },
+      "properties": {
+        "name": "Park",
+        "icon": "16"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-100.282176, 25.675285, 0],
+          [-100.282055, 25.675321, 0],
+          [-100.282157, 25.675669, 0],
+          [-100.282187, 25.676003, 0],
+          [-100.282149, 25.676486, 0],
+          [-100.282463, 25.676938, 0],
+          [-100.283965, 25.677347, 0],
+          [-100.283654, 25.678295, 0],
+          [-100.283257, 25.67932, 0],
+          [-100.28287, 25.680267, 0],
+          [-100.282484, 25.680538, 0]
+        ]
+      },
+      "properties": {
+        "name": "Walk to Ferris Wheel",
+        "stroke": "#0017ff",
+        "stroke-opacity": 1,
+        "stroke-width": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.282178, 25.679363, 0]
+      },
+      "properties": {
+        "name": "Ferris Wheel",
+        "icon": "17",
+        "description": "<img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-019.jpg\" height=\"200\" width=\"auto\" /><img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-020.jpg\" height=\"200\" width=\"auto\" />"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.283552, 25.682022, 0]
+      },
+      "properties": {
+        "name": "Random Blood Splatter",
+        "icon": "18",
+        "description": "<img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-015.jpg\" height=\"200\" width=\"auto\" /><img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-016.jpg\" height=\"200\" width=\"auto\" />"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.310851, 25.667014, 0]
+      },
+      "properties": {
+        "name": "Tried to Watch Fireworks",
+        "icon": "19"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.311844, 25.745088, 0]
+      },
+      "properties": {
+        "name": "Last Day Brunch",
+        "icon": "20",
+        "description": "The second best breakfast in Mexico I've had."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.355022, 25.680809, 0]
+      },
+      "properties": {
+        "name": "Mall",
+        "icon": "21",
+        "description": "Tried to see movie, but ended up at Starbucks."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.31249, 25.742749, 0]
+      },
+      "properties": {
+        "name": "Sushi Time",
+        "icon": "22",
+        "description": "It became a fav place, as you will see on next trip."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-100.301595, 25.74424, 0]
+      },
+      "properties": {
+        "name": "Waiting for Food",
+        "icon": "23",
+        "description": "<img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-023.jpg\" height=\"200\" width=\"auto\" />Trying to cheer me up.<img src=\"/photos/travels/Monterrey-2014-08/Monterrey-2014-018.jpg\" height=\"200\" width=\"auto\" />"
+      }
+    }
+  ]
+}
