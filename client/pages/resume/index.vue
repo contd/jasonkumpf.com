@@ -82,7 +82,7 @@
         class="mb-1"
       >
         <v-card-title>
-          {{ skill.name }} <span class="grey--text subtitle-1">{{ skill.level }}</span>
+          {{ skill.name }} <span class="mx-2 grey--text subtitle-1">{{ skill.level }}</span>
         </v-card-title>
         <v-card-text>
           <v-chip
@@ -105,10 +105,18 @@
         class="mb-1"
       >
         <v-card-text>
-          {{ pub.title }}, {{ pub.authors }}, {{ pub.publication }}, {{ pub.year }}
-          <a v-if="pub.website" :href="pub.website">{{ pub.website }}</a>
-          <a v-if="pub.website2" :href="pub.website2">{{ pub.website2 }}</a>
-          <span v-if="pub.summary">{{ pub.summary }}</span>
+          <p class="headline">
+            <strong>{{ pub.title }}</strong>, {{ pub.authors }}, {{ pub.publication }}, {{ pub.year }}
+          </p>
+          <p v-if="pub.summary">
+            <blockquote>
+              <span v-if="pub.summary">{{ pub.summary }}</span>
+            </blockquote>
+          </p>
+          <ul v-if="pub.website">
+            <li><a v-if="pub.website" :href="pub.website">{{ pub.website }}</a></li>
+            <li v-if="pub.website2"><a v-if="pub.website2" :href="pub.website2">{{ pub.website2 }}</a></li>
+          </ul>
         </v-card-text>
       </v-card>
       <v-divider />
@@ -133,7 +141,7 @@ export default {
   data () {
     return {
       sections: ['basics', 'work', 'education', 'skills', 'publications'],
-      colors: ['primary', 'secondary', 'red', 'green', 'orange'],
+      colors: ['primary', 'red', 'red darken-1', 'red darken-2', 'red darken-3', 'green', 'green  darken-1', 'green  darken-2', 'green  darken-3', 'orange', 'orange  darken-1', 'orange  darken-2', 'orange  darken-3'],
       resume: {},
       basics: {},
       work: [],

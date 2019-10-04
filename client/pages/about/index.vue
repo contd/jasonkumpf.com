@@ -7,34 +7,93 @@
         About
       </h1>
       <p>
-        I am very motivated and work very well with little assistance or guidance due to being self taught in most areas I have worked.
-        I do however work well with others and find great value working on teams and have learned a great deal from current and previous
-        team members. I’m versatile and able to quickly adapt to new situations and environments and work well staying focused under
-        severe pressure. I was a member of the University of Cincinnati’s Track and Field team which taught me not only how to be self
-        motivated and self reliant but to value my teammates and how we pushed each other to do our best making the whole team stronger.
-        I’ve handled IT crisis situations that drove many others around into panic while keeping myself focused and calm until the situation was resolved.
+        Born and raised in Cincinnati, OH but now residing just outside of Washington D.C.
+      </p>
+      <h1 class="display-1">
+        Work
+      </h1>
+      <p>
+        An experienced software engineer (20+ years) mostly in web application and infrastructure development. I spent 7 years pursuing my PhD in Electrical Engineering
+        building software platforms and solutions for data science research. After teaching as a full time adjunct professor for one year I decided to come back to what
+        I am most passionate. I have 2 Bachelors degrees in Information Engineering Technology and Mechanical Engineering Technology from the
+        <a href="https://www.uc.edu" target="_blank">University of Cincinnati</a> where I did my graduate work and teaching.  Most of my work has been for software
+        development companies but also with non-profits, educational institutions and with small and non-technical companies.  I
+        have very strong written and oral communication skills.  I consider myself to be very responsible and always punctual to deadlines.
       </p>
       <p>
-        I finished working full time as a PhD candidate at the University of Cincinnati majoring in Electrical Engineering. For the first
-        5 years I also works for U.C. Infrastructure Institute as a research assistant. This work played a role in my efforts to move more
-        into a research oriented field while being able to apply my past work experience into applications of cutting edge technologies that
-        are making their way into the industry.
+        Currently I work as a freelance consultant developing web, mobile and middle-ware apps that bridge the gap between the various open hardware embedded systems
+        some of which I have designed and built as an electronics hobbyist. These systems integrate with existing infrastructure as well as new apps.  They often require
+        various automated solutions to companies that want full control and customization while leveraging cutting edge technologies.  Many implementations involve
+        deploying to multiple cloud providers (VPS/IaaS) providers that require integration with their own private cloud infrastructure and leveraging common design
+        patterns and top level security and privacy.  Hybrid cloud solution integrations are usually required for high customization and automation of infrastructure
+        on demand. I utilize various tools to develop and deliver programmable infrastructure to streamline the process of deploying reconfigurable development workflows
+        and adaptable infrastructure management across multiple service providers.
+      </p>
+      <p class="d-flex justify-md-space-around">
+        <img src="~/assets/aws.svg" alt="AWS" width="100" />
+        <img src="~/assets/azure.svg" alt="Azure" width="100" />
+        <img src="~/assets/digital-ocean.svg" alt="Digital Ocean" width="100" />
+        <img src="~/assets/docker.svg" alt="Docker" width="100" />
+        <img src="~/assets/google-cloud-platform.svg" alt="GCP" width="100" />
+        <img src="~/assets/kubernetes.svg" alt="Kubernetes" width="100" />
       </p>
       <p>
-        Currently I work as a freelance consultant developing web, mobile and middle-ware apps that bridge the gap between the various open
-        hardware embedded systems I design and build. These systems integrate with existing infrastructure as well as new web and mobile apps
-        to provide various automated solutions to companies that want full control and customization while leveraging the latest cutting edge
-        technologies.  Many implementations involve deploying to multiple cloud providers or VPS/IaaS providers that require integration with
-        their own private cloud infrastructure using a common design pattern and top lever security and privacy where needed.  Hybrid cloud
-        solution integrations are almost always desired which require a more robust and highly customizable and automated infrastructure which
-        we utilize programmable software based infrastructure to streamline the process of on demand reconfigurable development workflows to
-        infrastructure management and expansion as needed and across multiple service providers using the same code base and tools.
+        Some of the types of systems designed and implemented are deployed to
+        <a href="https://aws.amazon.com" target="_blank">AWS</a>,
+        <a href="https://azure.microsoft.com" target="_blank">Azure</a>,
+        <a href="https://digitalocean.com" target="_blank">Digital Ocean</a> and
+        <a href="https://cloud.google.com" target="_blank">Google Cloud Platform</a> in
+        <a href="https://kubernetes.io" target="_blank">Kubernetes</a>
+        clusters so client apps can be deployed to any of the aforementioned service providers as well as internally. Spreading applications and continuous development
+        workflows across multiple cloud service providers and internally makes them highly available and virtually zero potential for outages or downtime.
+      </p>
+      <p class="d-flex justify-md-space-around">
+        <img src="~/assets/nodejs.svg" alt="Node.js" width="100" />
+        <img src="~/assets/go-logo.svg" alt="Go" width="100" />
+        <img src="~/assets/python.svg" alt="Python" width="100" />
+        <img src="~/assets/php.svg" alt="Php" width="100" />
+        <img src="~/assets/perl.svg" alt="Perl" width="100" />
+        <img src="~/assets/vue.svg" alt="Vue.js" width="100" />
+        <img src="~/assets/react.svg" alt="React" width="100" />
+        <img src="~/assets/preact.svg" alt="Preact" width="100" />
       </p>
       <p>
-        Some of the types of systems we design and implement can utilize AWS, Digital Ocean, Azure and Google Compute Cloud to host fleets of
-        clustered containers that can be deployed to any of the aforementioned service providers as well as internally to spread your applications
-        and continuous development workflows across them making them highly available and virtually zero potential for outages or downtime to
-        your end customers while maintaining a single set of tools for your DevOps teams to manage, monitor and adapt to your loads with agility.
+        My main skills are development of web services
+        (<a href="https://microservices.io" target="_blank">microservices</a>) in
+        <a href="https://nodejs.org" target="_blank">Node.js</a>,
+        <a href="https://golang.org" target="_blank">Go</a>,
+        <a href="https://python.org" target="_blank">Python</a>,
+        <a href="https://www.php.net" target="_blank">Php</a> or
+        <a href="https://www.perl.org" target="_blank">Perl</a>. Most projects involve developing container
+        (<a href="https://docker.com" target="_blank">Docker</a>) based services that work with
+        <a href="https://aws.amazon.com" target="_blank">AWS</a> ECS or any
+        <a href="https://kubernetes.io" target="_blank">Kubernetes</a>
+        cluster. I also have very strong frontend web development skills with various frameworks
+        (<a href="https://vuejs.org" target="_blank">Vue.js</a>,
+        <a href="https://www.react.org" target="_blank">React</a>,
+        <a href="https://preact.org" target="_blank">Preact</a>
+        , etc).
+      </p>
+      <p class="d-flex justify-md-space-around">
+        <img src="~/assets/mysql.svg" alt="MySQL" width="100" />
+        <img src="~/assets/mssql.svg" alt="Microsoft SQL Server" width="100" />
+        <img src="~/assets/postgresql.svg" alt="Postgresql" width="100" />
+        <img src="~/assets/sqlite.svg" alt="Sqlite" width="100" />
+        <img src="~/assets/mongodb.svg" alt="Mongodb" width="100" />
+        <img src="~/assets/redis.svg" alt="Redis" width="100" />
+        <img src="~/assets/influxdb.svg" alt="InfluxDB" width="100" />
+      </p>
+      <p>
+        Most applications worked on are a combination of database driven REST APIs. Significant time has been spent working with both relational
+        (<a href="https://mysql.org" target="_blank">MySQL</a>,
+        <a href="https://www.microsoft.com/en-us/sql-server/" target="_blank">MSSQL</a>,
+        <a href="https://www.postgresql.org" target="_blank">Postgresql</a>,
+        <a href="https://www.sqlite.org" target="_blank">Sqlite</a>)
+        and nosql
+        (<a href="https://www.mongodb.com" target="_blank">Mongodb</a>,
+        <a href="https://redis.io/" target="_blank">Redis</a>,
+        <a href="https://www.influxdata.com/" target="_blank">InfluxDB</a>)
+        databases and am very fluent writing and optimizing SQL.
       </p>
     </v-container>
   </v-layout>
