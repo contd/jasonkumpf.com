@@ -15,7 +15,7 @@ COPY server/server.go .
 RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o server
 
 # Production image
-FROM golang:1.12.9-stretch
+FROM golang:1.14.1-stretch
 COPY --from=builder /app/server /app/
 ENV SERVER_PORT ":8088"
 ENV SERVER_HOST "0.0.0.0"

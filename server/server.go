@@ -93,6 +93,15 @@ func main() {
 		AllowOrigins: OriginsAllowed,
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
+	// KeyAuth - expects the request Header to have Authorization="Bearer: <Token>"
+	// config := middleware.KeyAuthConfig{
+	// 	KeyLookup:  "header:" + echo.HeaderAuthorization,
+	// 	AuthScheme: "Bearer",
+	// 	Validator: func(key string, c echo.Context) (bool, error) {
+	// 		return key == "SQGsc2mhvU9GmjtZUSHYiDMbFfLqA+3v", nil
+	// 	},
+	// }
+	// router.Use(middleware.KeyAuthWithConfig(config))
 
 	router.Static("/photos", "./photos")
 	router.File("/favicon.ico", "photos/favicon.ico")

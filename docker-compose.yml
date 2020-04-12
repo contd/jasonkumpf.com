@@ -10,7 +10,7 @@ services:
     container_name: jasonkumpf
     restart: always
     environment:
-      - API_BASE_URL=http://jasonkumpfapi:8088
+      - API_BASE_URL=https://api.jasonkumpf.com
     volumes:
       - ./client/dist:/code
     labels:
@@ -27,15 +27,18 @@ services:
     build: .
     container_name: jasonkumpfapi
     restart: always
-    ports:
-      - 8088:8088
     environment:
       - SERVER_PORT=:8088
-      - SERVER_HOST=http://jasonkumpfapi
+      - SERVER_HOST=https://api.jasonkumpf.com
       - PHOTOS_PATH=/photos
     volumes:
       - ./client/dist/photos:/photos
     labels:
-      - "traefik.enabled=false"
+      - "traefik.backend=jasonkumpfapi"
+      - "traefik.domain=jasonkumpf.com"
+      - "traefik.frontend.rule=Host:api.jasonkumpf.com"
+      - "traefik.frontend.redirect.entryPoint=https"
+      - "traefik.docker.network=web"
+      - "traefik.port=8088"
     networks:
       - web
