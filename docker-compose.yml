@@ -28,6 +28,7 @@ services:
     container_name: jasonkumpfapi
     restart: always
     environment:
+      - API_BASE_URL=https://api.jasonkumpf.com
       - SERVER_PORT=:8088
       - SERVER_HOST=https://api.jasonkumpf.com
       - PHOTOS_PATH=/photos
