@@ -94,6 +94,9 @@ func main() {
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
 	// KeyAuth - expects the request Header to have Authorization="Bearer: <Token>"
+	// This works so next would be to implement on the auth piece which would take the
+	// posted username and password, check against a db, if correct then return the token to use
+	// which hands off to the client to store and use for future requests.
 	// config := middleware.KeyAuthConfig{
 	// 	KeyLookup:  "header:" + echo.HeaderAuthorization,
 	// 	AuthScheme: "Bearer",

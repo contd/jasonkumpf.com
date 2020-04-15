@@ -12,6 +12,7 @@ services:
     ports:
       - 8088:8088
     environment:
+      - API_BASE_URL=http://localhost:8088
       - SERVER_PORT=:8088
       - SERVER_HOST=http://localhost
       - PHOTOS_PATH=/photos

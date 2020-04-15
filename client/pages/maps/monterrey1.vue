@@ -27,8 +27,9 @@
 
 <script>
 import Vue from 'vue'
+import GeoJsonService from '@/services/GeoJsonService'
 import GeoJsonPopup from '@/components/GeoJsonPopup'
-const monterrey2014 = require('@/services/monterrey-09-2014.json')
+// const monterrey2014 = require('@/services/monterrey-09-2014.json')
 
 function onEachFeature (feature, layer) {
   const GeoJsonPop = Vue.extend(GeoJsonPopup)
@@ -43,9 +44,17 @@ function onEachFeature (feature, layer) {
 
 export default {
   name: 'Monterrey2014',
-  head () {
-    return {
-      title: 'Monterrey - August 2014'
+  async asyncData ({ error }) {
+    try {
+      const resp = await GeoJsonService.getGeoJson('Monterrey-2014-08')
+      return {
+        geojson: resp
+      }
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: `Unable to fetch geojson at this time: ${e}`
+      })
     }
   },
   data () {
@@ -65,9 +74,6 @@ export default {
       }
     }
   },
-  created () {
-    this.geojson = monterrey2014
-  },
   methods: {
     zoomUpdated (zoom) {
       this.zoom = zoom
@@ -77,6 +83,11 @@ export default {
     },
     boundsUpdated (bounds) {
       this.bounds = bounds
+    }
+  },
+  head () {
+    return {
+      title: 'Monterrey - August 2014'
     }
   }
 }

@@ -33,13 +33,14 @@
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-img
-        src="/jasonkumpf.svg"
+      <img
+        src="/logo.svg"
         height="50px"
-        width="250px"
+        width="50px"
         contain
         position="left"
       />
+      <span style="font-weight: 700;font-size: 3em;font-family: Liberation Mono;">jason</span><span style="font-weight: 400;font-size: 3em;font-family: Liberation Mono;">kumpf</span>
       <div class="flex-grow-1" />
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
@@ -53,7 +54,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn icon href="https://github.com/contd" target="_new" v-on="on">
-            <v-icon>mdi-github-circle</v-icon>
+            <v-icon>mdi-github</v-icon>
           </v-btn>
         </template>
         <span>Github</span>
